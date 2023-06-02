@@ -244,7 +244,11 @@ module.exports = {
         })
     },
     getAddaddress: (req, res) => {
-        res.render('user/add-address')
+        const id = req.session.user._id;
+        cartHelpers.getcartCount(id).then((cartCount)=>{
+            res.render('user/add-address',{cartCount})
+        })
+       
     },
     newAddress: (req, res) => {
         console.log('>?>?>?>?>?>?>?>?>??')
