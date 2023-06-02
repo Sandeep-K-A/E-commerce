@@ -1,0 +1,221 @@
+<section>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Your Orders</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="sortField">Sort By:</label>
+                    <select id="sortField" class="form-select">
+                        <option value="createdAt" <% if(sortField === 'createdAt') { %>selected<% } %>>Date</option>
+                        <option value="Status" <% if(sortField === 'Status') { %>selected<% } %>>Status</option>
+                        <!-- Add more sorting options if needed -->
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="sortOrder">Sort Order:</label>
+                    <select id="sortOrder" class="form-select">
+                        <option value="asc" <% if(sortOrder === 'asc') { %>selected<% } %>>Ascending</option>
+                        <option value="desc" <% if(sortOrder === 'desc') { %>selected<% } %>>Descending</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="searchQuery">Search:</label>
+                    <input id="searchQuery" type="text" class="form-control" value="<%= searchQuery %>"
+                        placeholder="Enter search term">
+                </div>
+            </div>
+
+            <% if(locals.allOrder.length!=0){%>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>PaymentMethod</th>
+                                <th>Total</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% allOrder.forEach(items=>{%>
+                                <tr>
+                                    <td><a href="/orderdetails/<%=items.orderId %>">
+                                            <%=items.orderId %>
+                                        </a></td>
+                                    <td>
+                                        <% const date=new Date(items.createdAt); %>
+                                            <%=`${date.getDate()} /${date.getMonth() + 1}/${date.getFullYear()}` %>
+                                    </td>
+                                    <td>
+                                        <% if(items.Status==='Placed' ){%>
+                                            <span class="badge rounded-pill alert-warning"
+                                                id="orderStatus-<%=items.orderId %>">
+                                                <%=items.Status %>
+                                            </span>
+                                            <%}else if(items.Status=='Intransit' ){%>
+                                                <span class="badge rounded-pill alert-info"
+                                                    id="orderStatus-<%=items.orderId %>">
+                                                    <%=items.Status %>
+                                                </span>
+                                                <%}else if(items.Status=='Delivered' ){%>
+                                                    <span class="badge rounded-pill alert-success"
+                                                        id="orderStatus-<%=items.orderId %>">
+                                                        <%=items.Status %>
+                                                    </span>
+                                                    <%}else if(items.Status=='Cancelled' ){%>
+                                                        <span class="badge rounded-pill alert-danger"
+                                                            id="orderStatus-<%=items.orderId %>">
+                                                            <%=items.Status %>
+                                                        </span>
+                                                        <%}else{%>
+                                                            <span class="badge rounded-pill alert-dark"
+                                                                id="orderStatus-<%=items.orderId %>">
+                                                                <%=items.Status %>
+                                                            </span>
+                                                            <%}%>
+                                    </td>
+                                    <td>
+                                        <%=items.PaymentMethod %>
+                                    </td>
+                                    <td>
+                                        <%=items.TotalAmount %> for <%=items.Products.length %> item
+                                    </td>
+                                    <td class="button-td">
+                                      
+
+                                                    <% if(items.Status=='Delivered' ){%>
+                                                        <button id="returnButton-<%=items.orderId %>"
+                                                            class="btn btn-sm btn-secondary"
+                                                            onclick="returnOrder('<%=items.orderId%>')">
+                                                            <i class="fi-rs-shopping-bag mr-5"></i>Return order
+                                                        </button>
+                                                        <%}else if(items.Status=='Placed' || items.Status=='Intransit'
+                                                            ){%>
+                                                            <button id="cancelButton-<%=items.orderId %>"
+                                                                class="btn btn-sm"
+                                                                onclick="cancelOrder('<%=items.orderId%>')">
+                                                                <i class="fi-rs-shopping-bag mr-5"></i>Cancel order
+                                                            </button>
+                                                            <%}else if(items.Status=='Cancelled' ){%>
+                                                                OrderCancelled
+                                                                <%}else{%>
+                                                                    OrderReturned
+                                                                    <%} %>
+                                    </td>
+                                </tr>
+                                <%}) %>
+                        </tbody>
+                    </table>
+                </div>
+                <nav>
+  <ul class="pagination justify-content-center">
+    <% if (currentPage > 1) { %>
+    <li class="page-item">
+      <a class="page-link" style="color: green;" href="?page=<%= currentPage - 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Previous</a>
+    </li>
+    <% } %>
+    <% for (let i = 1; i <= totalPages; i++) { %>
+    <li class="page-item <% if (i === currentPage) { %>active<% } %>">
+      <a class="page-link" style="color: black;" href="?page=<%= i %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>"><%= i %></a>
+    </li>
+    <% } %>
+    <% if (currentPage < totalPages) { %>
+    <li class="page-item">
+      <a class="page-link" style="color: green;" href="?page=<%= currentPage + 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Next</a>
+    </li>
+    <% } %>
+  </ul>
+</nav>
+
+                <%}else{%>
+                    <h3> You have no Orders..!!</h3>
+                    <%} %>
+
+        </div>
+    </div>
+</section>
+<script>
+    function cancelOrder(orderId) {
+        Swal.fire({
+            title: 'Cancel Order!',
+            text: 'Would you like to cancel this order?',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/cancel-order/${orderId}`,
+                    method: 'get',
+                    success: (response) => {
+                        console.log(response)
+                        if (response.Status && response.order.Status == 'Cancelled') {
+                            $(`#orderStatus-${orderId}`).removeClass().addClass(' badge rounded-pill alert-danger');
+                            $(`#orderStatus-${orderId}`).text(response.order.Status);
+                            $(`#cancelButton-${orderId}`).hide();
+                            $('<span class="order-cancelled-text">Order Cancelled</span>').insertAfter(`#cancelButton-${orderId}`);
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function returnOrder(orderId) {
+        Swal.fire({
+            title: 'Return Order!',
+            text: 'Would you like to return this order?',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/return-order/${orderId}`,
+                    method: 'get',
+                    success: (response) => {
+                        alert(response)
+                        if (response.Status && response.order.Status == 'Returned') {
+                            $(`#orderStatus-${orderId}`).removeClass().addClass(' badge rounded-pill alert-dark');
+                            $(`#orderStatus-${orderId}`).text(response.order.Status);
+                            $(`#returnButton-${orderId}`).hide();
+                            $('<span class="order-cancelled-text">Order Returned</span>').insertAfter(`#returnButton-${orderId}`);
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    document.getElementById('sortField').addEventListener('change', handleSortChange);
+    document.getElementById('sortOrder').addEventListener('change', handleSortChange);
+    document.getElementById('searchQuery').addEventListener('input', handleSearch);
+
+    function handleSortChange() {
+        const sortField = document.getElementById('sortField').value;
+        const sortOrder = document.getElementById('sortOrder').value;
+        const searchQuery = document.getElementById('searchQuery').value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('sortField', sortField);
+        url.searchParams.set('sortOrder', sortOrder);
+        url.searchParams.set('searchQuery', searchQuery);
+        window.location.href = url.href;
+    }
+
+    function handleSearch() {
+        const searchQuery = document.getElementById('searchQuery').value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('searchQuery', searchQuery);
+        window.location.href = url.href;
+    }
+</script>

@@ -1,0 +1,141 @@
+<section class="mt-50 mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-25">
+                    <h4>Add New Address</h4>
+                </div>
+                <form method="post" action="/add-address" id="add-address" onsubmit="return validateAddAddress()">
+                    <div class="form-group">
+                        <input type="text" required="" id="FullName" name="fullname" placeholder="Full Name *" onkeyup="return validateName()">
+                        <span id="FullNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="houseaddress" id="HouseAddress" required="" placeholder="House Address *" onkeyup=" return validateHouseAddress()">
+                        <span id="AddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="text" name="city" id="City" placeholder="City" onkeyup=" return validateCity()">
+                        <span id="CityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="text" name="state" id="State" placeholder="State " onkeyup="return validateState()">
+                        <span id="StateError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="text" name="zipCode" id="PostalCode" placeholder="Postcode / ZIP *" onkeyup="return validatePostalCode()">
+                        <span id="PostalCodeError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="text" name="phone" id="Phone" placeholder="Phone *" onkeyup="return validatePhone()">
+                        <span id="PhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="text" name="email" id="email" placeholder="Email address *" onkeyup="return validateEmail()">
+                        <span id="EmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="btn btn-primary w-100">Add Address</button>
+                        <span id="AddAddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function validateName() {
+
+        const FullName = document.getElementById('FullName').value;
+        const regExp = /^[a-zA-Z ]*$/
+        if (!regExp.test(FullName)) {
+            document.getElementById('FullNameError').innerHTML = "Enter a Valid Name";
+            return false;
+        } else {
+            document.getElementById('FullNameError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateHouseAddress(){
+        const HouseAddress = document.getElementById('HouseAddress').value;
+        const regExp = /^(?=.*[A-Za-z])[A-Za-z0-9]+\s(?=.*[A-Za-z])[A-Za-z0-9]+$/;
+        if(!regExp.test(HouseAddress)){
+            document.getElementById('AddressError').innerHTML="Enter a valid House Address";
+            return false;
+        }else{
+            document.getElementById('AddressError').innerHTML = "";
+            return true;
+        }
+
+    }
+
+    function validateCity(){
+        const City = document.getElementById('City').value;
+        const regExp = /^[A-Za-z-]+$/
+        if(!regExp.test(City)){
+            document.getElementById('CityError').innerHTML="Enter a valid City Name";
+            return false;
+        }else{
+            document.getElementById('CityError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateState(){
+        const State = document.getElementById('State').value;
+        const regExp = /^(?:[A-Za-z]+\s*)+$/
+        if(!regExp.test(State)){
+            document.getElementById('StateError').innerHTML = "Enter a valid State ";
+            return false;
+        }else{
+            document.getElementById('StateError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validatePostalCode(){
+        const PostalCode = document.getElementById('PostalCode').value;
+        const regExp = /^\d{6}$/;
+        if(!regExp.test(PostalCode)){
+            document.getElementById('PostalCodeError').innerHTML = "Enter a valid PostalCode";
+            return false;
+        }else{
+            document.getElementById('PostalCodeError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validatePhone(){
+        const Phone = document.getElementById('Phone').value;
+        const regExp = /^[1-9]{1}\d{9}$/
+        if(!regExp.test(Phone)){
+            document.getElementById('PhoneError').innerHTML = "Enter a valid Phone";
+            return false;
+        }else{
+            document.getElementById('PhoneError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateEmail(){
+        const Email = document.getElementById('email').value;
+        const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+        if(!regExp.test(Email)){
+            document.getElementById('EmailError').innerHTML = "Enter a valid Email"
+            return false;
+        }else{
+            document.getElementById('EmailError').innerHTML = ""
+            return true;
+        }
+    }
+
+    function validateAddAddress(){
+        if(!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() ||!validatePhone() || !validateEmail()){
+            document.getElementById('AddAddressError').innerHTML="Please Complete all fields!";
+            return false;
+        }else{
+            document.getElementById('add-address').submit()
+        }
+    }
+</script>

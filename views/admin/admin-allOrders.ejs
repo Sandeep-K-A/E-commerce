@@ -1,0 +1,167 @@
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Orders List </h2>
+            <p>List of all Orders.</p>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <!-- <header class="card-header">
+            <div class="row gx-3">
+                <div class="col-lg-4 col-md-6 me-auto">
+                    <input type="text" placeholder="Search..." class="form-control">
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Status</option>
+                        <option>Active</option>
+                        <option>Blocked</option>
+                        <option>Show all</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Show 20</option>
+                        <option>Show 30</option>
+                        <option>Show 40</option>
+                    </select>
+                </div>
+            </div>
+        </header>  -->
+        <% if(allOrders){%>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th scope="col">Order Id</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">OrderDate</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% allOrders.forEach((orders,index)=>{%>
+                                <tr>
+                                    <td>
+                                        <%=index + 1 %>
+                                    </td>
+                                    <td><b>
+                                            <a href="/admin/order-details/<%=orders.orderId %>">
+                                                <%=orders.orderId %>
+                                            </a>
+                                        </b></td>
+                                    <td>
+                                        <%=orders.userId.name %>
+                                    </td>
+                                    <td>
+                                        <%=orders.PaymentMethod %>
+                                    </td>
+
+                                    <td>
+                                        <% if(orders.Status==='Placed' ){%>
+                                            <span id="statusID/<%=orders._id %>" class="badge rounded-pill bg-warning">
+                                                <%=orders.Status %>
+                                            </span>
+                                            <%}else if(orders.Status==='Intransit' ){%>
+                                                <span id="statusID/<%=orders._id %>" class="badge rounded-pill bg-info">
+                                                    <%=orders.Status %>
+                                                </span>
+                                                <%}else if(orders.Status==='Delivered' ){%>
+                                                    <span id="statusID/<%=orders._id %>"
+                                                        class="badge rounded-pill bg-success">
+                                                        <%=orders.Status %>
+                                                    </span>
+                                                    <%}else if(orders.Status === 'Cancelled'){%>
+                                                        <span id="statusID/<%=orders._id %>"
+                                                            class="badge rounded-pill bg-danger">
+                                                            <%=orders.Status %>
+                                                        </span>
+                                                        <%}else{%>
+                                                            <span id="statusID/<%=orders._id %>"
+                                                                class="badge rounded-pill bg-secondary">
+                                                                <%=orders.Status %>
+                                                            </span>
+                                                            <%} %>
+                                    </td>
+                                    <td>
+                                        <% const date=new Date(orders.createdAt); %>
+                                            <%=`${date.getDate()} /${date.getMonth() + 1}/${date.getFullYear()}` %>
+                                    </td>
+                                    <td>
+                                        <%=orders.TotalAmount %>
+                                    </td>
+                                    <td>
+                                        <!-- Default dropstart button -->
+                                        <% if(orders.Status=== 'Delivered'){%>
+                                            order Delivered
+                                            <%}else if(orders.Status === 'Returned'){%>
+                                                order Returned
+                                                <%}else if(orders.Status === 'Cancelled'){%>
+                                                    order Cancelled
+                                                    <%}else{%>
+                                                        <div class="btn-group dropstart">
+                                                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Order Status
+                                                            </button>
+                                                            <ul class="dropdown-menu ">
+                                                                <li><a class="dropdown-item"
+                                                                        onclick="updateOrderStatus('<%=orders._id%>','Intransit')">intransit</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        onclick="updateOrderStatus('<%=orders._id%>','Delivered')">Delivered</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        onclick="updateOrderStatus('<%=orders._id%>','Cancelled')">Cancelled</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <%} %>
+                                    </td>
+                                </tr>
+                                <%}) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <%}else{%>
+                <h2>There are no Orders</h2>
+                <%} %>
+    </div>
+</section>
+<script>
+    function updateOrderStatus(id, status) {
+        $.ajax({
+            url: `/admin/order-status/${id}?status=${status}`,
+            method: 'get',
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    document.getElementById(`statusID/${id}`).innerHTML = status;
+                    if (status === 'Intransit') {
+                        $('[id^="statusID/' + id + '"]').removeClass();
+                        $('[id^="statusID/' + id + '"]').addClass('badge rounded-pill bg-info')
+                    } else if (status === 'Delivered') {
+                        $('[id^="statusID/' + id + '"]').removeClass();
+                        $('[id^="statusID/' + id + '"]').addClass('badge rounded-pill bg-success')
+                        $(`#statusID/${id}`).hide();
+                        $(`<span class="order-cancelled-text">Order Delivered</span>`).insertAfter(`#statusID/${id}`);
+
+                    } else {
+                        $('[id^="statusID/' + id + '"]').removeClass();
+                        $('[id^="statusID/' + id + '"]').addClass('badge rounded-pill bg-danger')
+                        $(`#statusID/${id}`).hide();
+                        $(`<span class="order-cancelled-text">Order Cancelled</span>`).insertAfter(`#statusID/${id}`);
+                    }
+                    toastr.success('Order Status Updated Successfully', '', { timeOut: 2000 })
+
+                }
+            }
+        })
+    }
+</script>

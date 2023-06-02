@@ -1,0 +1,589 @@
+<main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" rel="nofollow">Home</a>
+                <span></span> Pages
+                <span></span> Account
+            </div>
+        </div>
+    </div>
+    <section class="pt-150 pb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="dashboard-menu">
+                                <ul class="nav flex-column" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab"
+                                            href="#dashboard" role="tab" aria-controls="dashboard"
+                                            aria-selected="false"><i
+                                                class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="orders-tab" href="/allorders" role="tab"
+                                            aria-controls="orders" aria-selected="false"><i
+                                                class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab"
+                                            href="#track-orders" role="tab" aria-controls="track-orders"
+                                            aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>User
+                                            Wallet</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address"
+                                            role="tab" aria-controls="address" aria-selected="true"><i
+                                                class="fi-rs-marker mr-10"></i>My Address</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
+                                            href="#account-detail" role="tab" aria-controls="account-detail"
+                                            aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/logout"><i
+                                                class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="tab-content dashboard-content">
+                                <div class="tab-pane fade active show" id="dashboard" role="tabpanel"
+                                    aria-labelledby="dashboard-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Hello <%=userDetails.name %>! </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>From your account dashboard. you can easily check &amp; view your
+                                                <a>recent orders</a>, manage your <a>shipping and
+                                                    billing addresses</a> and <a>edit your password and account
+                                                    details.</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">Your Orders</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                            <th>Total</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>#1357</td>
+                                                            <td>March 45, 2020</td>
+                                                            <td>Processing</td>
+                                                            <td>$125.00 for 2 item</td>
+                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="tab-pane fade" id="track-orders" role="tabpanel"
+                                    aria-labelledby="track-orders-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">User Wallet</h5>
+                                        </div>
+                                        <div class="card-body contact-from-area">
+                                            <h5>Your Wallet Amount is Rs<%=userDetails.WalletAmount %>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+                                    <div class="row">
+                                        <% if(addresses){%>
+
+                                            <% addresses.address.forEach((item,index)=>{%>
+                                                <div class="col-lg-6">
+                                                    <div class="card mb-3 mb-lg-0" id="address-card-<%=index %>">
+                                                        <div class="card-header">
+                                                            <h5 class="mb-0">House Address <%=index + 1 %>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <address>
+                                                                <span id="FullName-<%=index %>">
+                                                                    <%=item.FullName %>
+                                                                </span><br>
+                                                                <span id="HouseAddress-<%=index %>">
+                                                                    <%=item.HouseAddress %>
+                                                                </span><br>
+                                                                <span id="Email-<%=index %>">
+                                                                    <%=item.Email %>
+                                                                </span><br>
+                                                                <span id="Phone-<%=index %>">
+                                                                    <%=item.Phone %>
+                                                                </span><br>
+                                                                <span id="City-<%=index %>">
+                                                                    <%=item.City %>
+                                                                </span><br>
+                                                                <span id="State-<%=index %>">
+                                                                    <%=item.State %>
+                                                                </span><br>
+                                                                <span id="PostalCode-<%=index %>">
+                                                                    <%=item.PostalCode %>
+                                                                </span>
+                                                                <!-- <%=item.FullName %><br>
+                                                                <%=item.HouseAddress %> ,<br>
+                                                                    <%=item.City %> <br>
+                                                                        <%=item.State %>, <%=item.PostalCode %><br>
+                                                                                <%=item.Email %><br>
+                                                                                    <%=item.Phone %> -->
+
+                                                            </address>
+                                                            <a class="btn-small" data-bs-toggle="modal"
+                                                                data-bs-target="#editAddressModal<%=index %>">Edit</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal form -->
+                                                <div class="modal fade" id="editAddressModal<%=index %>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="editAddressModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="editAddressModalLabel">Edit
+                                                                    Address</h5>
+                                                                <button type="button" class="close"
+                                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Your form goes here -->
+                                                                <form method="POST" id="edit-address-<%=index %>" onsubmit="return validateEditAddress('<%=index %>')">
+                                                                    <div class="form-group">
+                                                                        <label for="FullName">Full Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="FullName" name="FullName"
+                                                                            value="<%=item.FullName %>" required onkeyup="return validateName()">
+                                                                            <span id="FullNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="HouseAddress">House Address</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="HouseAddress" name="HouseAddress"
+                                                                            value="<%=item.HouseAddress %>" required onkeyup="return validateHouseAddress()">
+                                                                            <span id="AddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="City">City</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="City" name="City"
+                                                                            value="<%=item.City %>" required onkeyup="return validateCity()">
+                                                                            <span id="CityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="State">State</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="State" name="State"
+                                                                            value="<%=item.State %>" required onkeyup="return validateState()">
+                                                                            <span id="StateError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="PostalCode">Postal Code</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="PostalCode" name="PostalCode"
+                                                                            value="<%=item.PostalCode %>" required onkeyup="return validatePostalCode()">
+                                                                            <span id="PostalCodeError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Phone">Phone</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="Phone" name="Phone"
+                                                                            value="<%=item.Phone %>" required onkeyup="return validatePhone()">
+                                                                            <span id="PhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="email">e-mail</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="email" name="email"
+                                                                            value="<%=item.Email %>" required onkeyup="return validateEmail()">
+                                                                            <span id="EmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    </div>
+                                                                    <input type="text" name="addressId"
+                                                                        value="<%=item._id %>" hidden>
+                                                                    <button type="submit" class="btn btn-primary"
+                                                                        onclick="updateAddress(event,'<%=index%>')">Save
+                                                                        Changes</button>
+                                                                        <span id="EditAddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}) %>
+                                                    <div class="col-lg-6">
+                                                        <div class="card" style="width: 50%;">
+                                                            <div class="card-header">
+                                                                <h5 class="mb-0">Add New Address</h5>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <a href="/add-address" class="btn-small">
+                                                                    <img src="assets\imgs\page\plus-icon-plus-math-icon-download-icons-9.png"
+                                                                        alt="Add Address" style="max-width: 100%;;">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%}else{%>
+                                                        <div class="col-lg-6">
+                                                            <div class="card" style="width: 50%;">
+                                                                <div class="card-header">
+                                                                    <h5 class="mb-0">Add New Address</h5>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <a href="/add-address" class="btn-small">
+                                                                        <img src="assets\imgs\page\plus-icon-plus-math-icon-download-icons-9.png"
+                                                                            alt="Add Address" style="max-width: 100%;;">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <%} %>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="account-detail" role="tabpanel"
+                                    aria-labelledby="account-detail-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Account Details</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form method="post" id="Account_form">
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Display Name <span class="required"></span></label>
+                                                        <input required="" class="form-control square" name="UserName"
+                                                            value="<%=userDetails.name %>" type="text" id="UserName" onkeyup="return validateUserName()">
+                                                            <span id="UserNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Email Address <span class="required"></span></label>
+                                                        <input required="" class="form-control square" name="UserEmail"
+                                                            value="<%=userDetails.email %>" type="email" id="UserEmail" onkeyup="return validateUserEmail()">
+                                                            <span id="UserEmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Phone Number <span class="required"></span></label>
+                                                        <input required="" class="form-control square" name="UserPhone"
+                                                            id="UserPhone" value="<%=userDetails.phone %>" onkeyup="return validateUserPhone()">
+                                                            <span id="UserPhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Current Password <span class="required">*</span></label>
+                                                        <input required="" class="form-control square"
+                                                            name="UserPassword" type="password" id="UserPassword" onkeyup="return validateUserPassword()">
+                                                            <span id="UserPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>New Password <span class="required">*</span></label>
+                                                        <input class="form-control square" name="UserNewPassword"
+                                                            type="password" id="UserNewPassword" onkeyup="return validateUserNewPassword()">
+                                                            <span id="UserNewPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Confirm Password <span class="required">*</span></label>
+                                                        <input class="form-control square" name="UserConfirmPassword"
+                                                            type="password" id="UserConfirmPassword" onkeyup="return validateConfirmPassword()">
+                                                            <span id="UserConfirmPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-fill-out submit"
+                                                            name="submit" value="Submit">Save</button>
+                                                            <span id="UserAccountDetailsError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    function updateAddress(event, index) {
+        event.preventDefault()
+        if (!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() || !validatePhone() || !validateEmail()){
+            document.getElementById('EditAddressError').innerHTML = "Please Complete all Fields"
+            return false
+        }else{
+
+        
+        $.ajax({
+            url: '/edit-address',
+            method: 'post',
+            data: $(`#edit-address-${index}`).serialize(),
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    // let modal = document.getElementById(`editAddressModal${index}`)
+                    // modal.style.display = 'none';
+                    $('#editAddressModal' + index).modal('hide');
+                    document.getElementById(`FullName-${index}`).innerText = response.address.FullName;
+                    document.getElementById(`HouseAddress-${index}`).innerText = response.address.HouseAddress;
+                    document.getElementById(`Email-${index}`).innerText = response.address.Email;
+                    document.getElementById(`Phone-${index}`).innerText = response.address.Phone;
+                    document.getElementById(`City-${index}`).innerText = response.address.City;
+                    document.getElementById(`State-${index}`).innerText = response.address.State;
+                    document.getElementById(`PostalCode-${index}`).innerText = response.address.PostalCode;
+                    toastr.success('Address updated Successfully', '', {
+                        positionClass: 'toast-top-right',
+                        width: '100px',
+                        timeOut: 2000
+                    })
+
+                } else {
+                    // let modal = document.getElementById(`editAddressModal${index}`)
+                    // modal.style.display = 'none';
+                    $('#editAddressModal' + index).modal('hide');
+                    toastr.error('Error updating Address', '', {
+                        positionClass: 'toast-top-right',
+                        width: '100px',
+                        timeOut: 2000
+                    })
+                }
+            }
+        })
+    }
+    }
+
+    $('#Account_form').submit((event) => {
+        event.preventDefault()
+        if(!validateUserName() || !validateUserEmail() || !validateUserPassword() || !validateUserNewPassword() || !validateConfirmPassword()){
+            document.getElementById('UserAccountDetailsError').innerHTML = "Please Fix all above errors!"
+            return false;
+        }else{
+
+        
+        Swal.fire({
+            title: `Are you sure you want edit the user Account details?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, do it!',
+            cancelButtonText: 'No, cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/update-account',
+                    method: 'post',
+                    data: $('#Account_form').serialize(),
+                    success: (response) => {
+                        console.log(response)
+                        if (response.Status && response.passChange) {
+                            document.getElementById(`UserName`).innerText = response.user.name;
+                            document.getElementById(`UserEmail`).innerText = response.user.email;
+                            document.getElementById(`UserPhone`).innerText = response.user.phone;
+                            document.getElementById(`UserPassword`).innerText = '';
+                            toastr.success('Account Details updated with new Password', '', {
+                                positionClass: 'toast-top-right',
+                                width: '100px',
+                                timeOut: 2000
+                            })
+                        } else {
+                            document.getElementById(`UserName`).innerText = response.user.name;
+                            document.getElementById(`UserEmail`).innerText = response.user.email;
+                            document.getElementById(`UserPhone`).innerText = response.user.phone;
+                            document.getElementById(`UserPassword`).value = '';
+                            toastr.success('Account Details updated successfully', '', {
+                                positionClass: 'toast-top-right',
+                                width: '100px',
+                                timeOut: 2000
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+    })
+
+    function validateName() {
+
+        const FullName = document.getElementById('FullName').value;
+        const regExp = /^[a-zA-Z ]*$/
+        if (!regExp.test(FullName)) {
+            document.getElementById('FullNameError').innerHTML = "Enter a Valid Name";
+            return false;
+        } else {
+            document.getElementById('FullNameError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateHouseAddress() {
+        const HouseAddress = document.getElementById('HouseAddress').value;
+        const regExp = /^(?=.*[A-Za-z])[A-Za-z0-9]+\s(?=.*[A-Za-z])[A-Za-z0-9]+$/;
+        if (!regExp.test(HouseAddress)) {
+            document.getElementById('AddressError').innerHTML = "Enter a valid House Address";
+            return false;
+        } else {
+            document.getElementById('AddressError').innerHTML = "";
+            return true;
+        }
+
+    }
+
+    function validateCity() {
+        const City = document.getElementById('City').value;
+        const regExp = /^[A-Za-z-]+$/
+        if (!regExp.test(City)) {
+            document.getElementById('CityError').innerHTML = "Enter a valid City Name";
+            return false;
+        } else {
+            document.getElementById('CityError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateState() {
+        const State = document.getElementById('State').value;
+        const regExp = /^(?:[A-Za-z]+\s*)+$/
+        if (!regExp.test(State)) {
+            document.getElementById('StateError').innerHTML = "Enter a valid State ";
+            return false;
+        } else {
+            document.getElementById('StateError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validatePostalCode() {
+        const PostalCode = document.getElementById('PostalCode').value;
+        const regExp = /^\d{6}$/;
+        if (!regExp.test(PostalCode)) {
+            document.getElementById('PostalCodeError').innerHTML = "Enter a valid PostalCode";
+            return false;
+        } else {
+            document.getElementById('PostalCodeError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validatePhone() {
+        const Phone = document.getElementById('Phone').value;
+        const regExp = /^[1-9]{1}\d{9}$/
+        if (!regExp.test(Phone)) {
+            document.getElementById('PhoneError').innerHTML = "Enter a valid Phone";
+            return false;
+        } else {
+            document.getElementById('PhoneError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateEmail() {
+        const Email = document.getElementById('email').value;
+        const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+        if (!regExp.test(Email)) {
+            document.getElementById('EmailError').innerHTML = "Enter a valid Email"
+            return false;
+        } else {
+            document.getElementById('EmailError').innerHTML = ""
+            return true;
+        }
+    }
+
+    function validateUserName(){
+        const userName = document.getElementById('UserName').value;
+        const regExp = /^[a-zA-Z ]*$/;
+        if(!regExp.test(userName)){
+            document.getElementById('UserNameError').innerHTML="Enter a Valid Name"
+            return false;
+        }else{
+            document.getElementById('UserNameError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateUserEmail(){
+        const email = document.getElementById('UserEmail').value;
+        const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
+        if(!regExp.test(email)){
+            document.getElementById('UserEmailError').innerHTML = "Enter a valid e-mail"
+            return false;
+        }else{
+            document.getElementById('UserEmailError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateUserPassword(){
+        const password = document.getElementById('UserPassword').value;
+        // const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/
+        const regExp = /^.{8,}$/;
+        if(!regExp.test(password)){
+            document.getElementById('UserPasswordError').innerHTML = "Enter a valid Password"
+            return false;
+        }else{
+            document.getElementById('UserPasswordError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateUserPhone(){
+        const phone = document.getElementById('UserPhone').value;
+        const regExp = /^[1-9]{1}\d{9}$/;
+        if(!regExp.test(phone)){
+            document.getElementById('UserPhoneError').innerHTML="Enter a valid Phone";
+            return false;
+        }else{
+            document.getElementById('UserPhoneError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateUserNewPassword(){
+        const userNewPassword = document.getElementById('UserNewPassword').value;
+        // const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/
+        const regExp = /^.{8,}$/;
+        if(regExp.test(userNewPassword)){
+            document.getElementById('UserNewPasswordError').innerHTML="Enter a valid Password";
+            return false;
+        }else{
+            document.getElementById('UserNewPasswordError').innerHTML = "";
+            return true;
+        }
+    }
+    
+    function validateConfirmPassword(){
+        const confirmPassword = document.getElementById('UserConfirmPassword').value;
+        const passCheck = document.getElementById('UserNewPassword').value;
+        if(passCheck!==confirmPassword){
+            document.getElementById('UserConfirmPasswordError').innerHTML="Enter the same Password as above";
+            return false;
+        }else{
+            document.getElementById('UserConfirmPasswordError').innerHTML = "";
+            return true;
+        }
+    }
+
+</script>

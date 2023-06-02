@@ -1,0 +1,155 @@
+
+    <main class="main">
+      <div class="page-header breadcrumb-wrap">
+        <div class="container">
+          <div class="breadcrumb">
+            <a href="index.html" rel="nofollow">Home</a>
+            <span></span> My account
+            <span></span> Order details
+          </div>
+        </div>
+      </div>
+      <section class="mt-70 mb-60">
+        <div class="container">
+          <div class="row order-wrap mx-auto">
+            <div >
+              <a href=""><button id="" class="btn btn-sm btn-secondary">
+                <i class="fi-rs-shopping-bag mr-5"></i>Download Invoice
+              </button></a>
+            </div>
+            <div class="text-end mb-60">
+              <a href="/allorders" class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up">Back to all orders</a>
+            </div>
+          </div>
+          <div class="row order-wrap mx-auto">
+            <div class="col-4 pe-3">
+              <h4 class="mb-35 text-brand">Delivery Address</h4>
+              <div class="table-responsive">
+                <table class="table shopping-summery">
+                  <tbody>
+                    <tr>
+                      <!-- TODO exeption if no category is found -->
+                      <td><h5>Name: </h5></td>
+                      <td><b><h6><%=orderInfo.DeliveryAddress.FullName %></h6></b></td>
+                    </tr>
+                    <tr>
+                      <td><h5>Phone: </h5></td>
+                      <td><b><h6><%=orderInfo.DeliveryAddress.Phone %></h6></b></td>
+                    </tr>
+                    <tr>
+                      <td><h5>Address: </h5></td>
+                      <td><b><h6><%=orderInfo.DeliveryAddress.HouseAddress %></h6></b></td>
+                    </tr>
+                    <tr>
+                      <td><h5>Zipcode: </h5></td>
+                      <td><b><h6><%=orderInfo.DeliveryAddress.PostalCode %></h6></b></td>
+                    </tr>
+                    <tr>
+                        <td><h5>City: </h5></td>
+                        <td><b><h6><%=orderInfo.DeliveryAddress.City %></h6></b></td>
+                      </tr>
+                    <tr>
+                      <td><h5>State: </h5></td>
+                      <td><b><h6><%=orderInfo.DeliveryAddress.State %></h6></b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-4">
+              <h4 class="mb-35 text-brand">Order Details</h4>
+              <table class="table shopping-summery">
+                <tbody>
+                  <tr>
+                    <td><h5>Order ID: </h5></td>
+                    <td><h6><%=orderInfo.orderId %></h6></td>
+                  </tr>
+                  <tr>
+                    <td><h5>Items: </h5></td>
+                    <td><h6><%=orderInfo.Products.length %></h6></td>
+                  </tr>
+                  <tr>
+                    <td><h5>Order Status: </h5></td>
+                    <td><h6><%=orderInfo.Status %></h6></td>
+                  </tr>
+                  <tr>
+                    <td><h5>Date: </h5></td>
+                    <td>
+                        <h6>
+                        <% const date = new Date(orderInfo.createdAt); %>
+                        <%=`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` %>
+                        </h6>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><h5>Payment Method: </h5></td>
+                    <td><h6><%=orderInfo.PaymentMethod %></h6></td>
+                  </tr>
+                  <tr>
+                    <td><h5>Total Amount: </h5></td>
+                    <td><h6>Rs <%=orderInfo.TotalAmount %></h6></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-50 mb-70">
+        <div class="container">
+          <div class="row order-wrap mx-auto">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table shopping-summery text-center">
+                  <thead>
+                    <tr class="main-heading">
+                      <th scope="col">Image</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Unit price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Order Status</th>
+                      <!-- <th scope="col">Payment Status</th> -->
+                      <!-- <th scope="col">Action</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <% orderInfo.Products.forEach((item)=>{%>
+                    
+                    <tr class="-tr">
+                      <td class="image product-thumbnail">
+                          <img style="height: 3rem;" src="/images/products_image/<%=item.proId.ProductImages[0] %>"  alt="#">
+                        </a>
+                      </td>
+                      <td class="product-des product-name">
+                        <h5 class="product-name"><%=item.proId.ProductTitle %></h5>
+                      </td>
+                      <td class="text-center"><h5><%=item.proId.ProductPricing %></h5></td>
+                      <td class="text-center"><h5><%=item.quantity %></h5></td>
+                      <td class="price" data-title="Price"><h5><%=item.subTotal %></h5></span></td>
+                      <td class="text-center" >
+                        <span class="color3 font-weight-bold">
+                          <span class="badge rounded-pill alert-warning"><%=orderInfo.Status %></span>
+                        </span>
+                      </td>
+                      <!-- <td class="text-right" data-title="">
+                         element.paymentstatus
+                      </td> -->
+                      <!-- <td class="button-td">
+                      
+                      
+                        <button id="" class="btn btn-sm btn-secondary" onclick="">
+                          <i class="fi-rs-shopping-bag mr-5"></i>Return order
+                        </button>
+                      </td> -->
+                    </tr>
+                    <%}) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script></script>

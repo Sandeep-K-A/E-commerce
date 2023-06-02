@@ -1,0 +1,85 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Add New Banner</h2>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Banner Details</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="add-banner" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">BannerHeader</label>
+                            <input type="text" name="BannerHeader" placeholder="Type here" class="form-control"
+                                id="banner_header">
+                        </div>
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">Banner Description 1</label>
+                            <textarea placeholder="Type here"name="BannerDescription1" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Banner Description 2</label>
+                            <textarea placeholder="Type here"name="BannerDescription2" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">BannerLink</label>
+                            <input type="text" name="BannerLink" placeholder="Type here" class="form-control"
+                                id="banner_header">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4>Banner Image</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="input-upload">
+                                            <img src="/assets1/imgs/theme/upload.svg" id="imagePreview1"  alt="">
+                                            <input class="form-control" type="file" name="BannerImage" id="imageInput">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-md rounded font-sm hover-up " type="submit" style="float: right;"
+                                    onclick="">Add Banner</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+    $('#add-banner').submit((e)=>{
+        const formData = new FormData($('#add-banner')[0]);
+        e.preventDefault()
+        $.ajax({
+            url:'/admin/add-banners',
+            method:'post',
+            data:formData,
+            processData: false,
+        contentType: false,
+            success:(response)=>{
+                if(response.bannerExist){
+                    const message = 'Banner already exist with this Banner Header..Try changing the Banner Header'
+                    const url = `/admin/banners?message=${encodeURIComponent(message)}`
+                    location.href=url;
+                }else if(response.Status){
+                    const message = 'New Banner added successfully'
+                    const url = `/admin/banners?message=${encodeURIComponent(message)}`
+                    location.href=url;
+                }else{
+                    const message = 'operation failed...'
+                    const url = `/admin/banners?message=${encodeURIComponent(message)}`
+                    location.href=url;
+                }
+            }
+        })
+    })
+</script>

@@ -1,0 +1,86 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Add New Coupon</h2>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Coupon Details</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="add-coupon">
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">Coupon Name</label>
+                            <input type="text" name="CouponName" placeholder="Type here" class="form-control"
+                                id="coupon_name">
+                        </div>
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">Coupon Code</label>
+                            <input type="text" name="CouponCode" placeholder="Type here" class="form-control"
+                                id="coupon_code">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Coupon ExpiryDate</label>
+                            <input type="date" placeholder="Type here" name="ExpiryDate" class="form-control"
+                                id="coupon_expiry">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">Min Amount</label>
+                                    <div class="row gx-2">
+                                        <input placeholder="$" type="text" name="MinAmount" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">Max Amount</label>
+                                    <input placeholder="$" type="text" name="MaxAmount" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">Discount Percentage</label>
+                                    <div class="row gx-2">
+                                        <input placeholder="$" type="text" name="DiscountPercentage"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-md rounded font-sm hover-up " type="submit" style="float: right;"
+                                    onclick="AddCoupon(event)">Add Coupon</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+    function AddCoupon(event) {
+        event.preventDefault();
+        $.ajax({
+            url: '/admin/add-coupons',
+            method: 'post',
+            data: $('#add-coupon').serialize(),
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    const message = 'New Coupon added..'
+                    const url = `/admin/coupons?message=${encodeURIComponent(message)}`
+                    location.href = url
+                } else {
+                    const message = 'Coupon already exist..!!';
+                    const url = `/admin/coupons?message=${encodeURIComponent(message)}`;
+                    location.href = url;
+                }
+            }
+
+        })
+    }
+</script>

@@ -1,0 +1,182 @@
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Products List </h2>
+            <p>List of all available Evara Products.</p>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <!-- <header class="card-header">
+            <div class="row gx-3">
+                <div class="col-lg-4 col-md-6 me-auto">
+                    <input type="text" placeholder="Search..." class="form-control">
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Status</option>
+                        <option>Active</option>
+                        <option>Blocked</option>
+                        <option>Show all</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Show 20</option>
+                        <option>Show 30</option>
+                        <option>Show 40</option>
+                    </select>
+                </div>
+            </div>
+        </header> -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th scope="col">Banner Header</th>
+                            <th scope="col">Banner Description1</th>
+                            <th scope="col">Banner Description2</th>
+                            <th scope="col">Banner Link</th>
+                            <th scope="col">Banner Status</th>
+                            <th scope="col">Banner Image</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% banners.forEach((banner,index)=>{%>
+                            <tr>
+                                <td>
+                                    <%=index + 1 %>
+                                </td>
+                                <td>
+                                    <%=banner.bannerMainHeader %>
+                                </td>
+                                <td>
+                                    <%=banner.bannerDescription %>
+                                </td>
+                                <td>
+                                    <%=banner.bannerSubDescription %>
+                                </td>
+                                <td>
+                                    <%=banner.bannerLink %>
+                                </td>
+                                <td>
+                                    <span id="BannerStatus-<%=banner._id %>">
+                                        <%=banner.bannerStatus %>
+                                    </span>
+                                </td>
+                                <td style="vertical-align: middle; padding: 0;"><img
+                                        src="/assets/imgs/slider/<%=banner.bannerImage %>" alt="" style="width: 40px;">
+                                </td>
+                                <td class="d-flex"><a href="/admin/edit-banner/<%=banner._id %>"
+                                        class="btn btn-sm rounded btn-primary font-sm edit-product"
+                                        onclick="getEditBanner(event)">Edit</a>
+                                    <% if(banner.bannerStatus){%>
+                                        <a class="btn btn-sm rounded btn-danger font-sm " id="StatusButton-<%=banner._id %>"
+                                            onclick="changeBannerStatus(event,'<%=banner._id%>')">Disable</a>
+                                        <%}else{%>
+                                            <a class="btn btn-sm rounded btn-success font-sm " id="StatusButton-<%=banner._id %>"
+                                                onclick="changeBannerStatus(event,'<%=banner._id%>')">Enable</a>
+                                            <%} %>
+                                            <!-- <a class="btn btn-sm rounded btn-danger font-sm " id="StatusButton-<%=banner._id %>"
+                                            onclick="changeBannerStatus(event,'<%=banner._id%>')">Disable</a> -->
+
+                                </td>
+                            </tr>
+                            <%}) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="pagination-area mt-15 mb-50">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">16</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div> -->
+</section>
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const editMsg = urlParams.get('editMsg')
+    const message = urlParams.get('message');
+
+    if (message) {
+        if (message.startsWith('New Banner added successfully')) {
+            toastr.success(message, '', { timeOut: 2000 });
+        } else if (message.startsWith('Banner already exist with this Banner Header..Try changing the Banner Header')) {
+            toastr.error(message, '', { timeOut: 2000 });
+        } else if (message.startsWith('operation failed...')) {
+            toastr.error(message, '', { timeOut: 2000 });
+        }
+    } else if (editMsg) {
+        if (editMsg.startsWith('Banner details updated Successfully')) {
+            toastr.success(editMsg, '', { timeOut: 2000 })
+        }
+    }
+
+    function getEditBanner(event) {
+        event.preventDefault()
+        Swal.fire({
+            title: `Are you sure you want edit the banner details?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, do it!',
+            cancelButtonText: 'No, cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = event.target.href;
+            }
+        })
+    }
+
+    function changeBannerStatus(event, id) {
+        event.preventDefault();
+        let text
+        if(document.getElementById(`StatusButton-${id}`).innerHTML == 'Disable'){
+             text = 'Are you sure you want to disable this Banner ?'
+        }else{
+             text = 'Are you sure you want to enable this Banner ?'
+        }
+        Swal.fire({
+            title: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, do it!',
+            cancelButtonText: 'No, cancel',
+        }).then((result)=>{
+            if(result.isConfirmed){
+                $.ajax({
+                    url:`/admin/delete-banner/${id}`,
+                    method:'get',
+                    success:(response)=>{
+                        if(response.Status){
+                            const bannerStatus = document.getElementById(`BannerStatus-${id}`)
+                            bannerStatus.innerHTML = response.banner.bannerStatus;
+                            if(response.banner.bannerStatus === true){
+                                toastr.success('Banner enabled successfully','',{timeOut:2000})
+                                document.getElementById(`StatusButton-${id}`).innerHTML = 'Disable'
+                                $('[id^="StatusButton-'+ id +'"]').removeClass('btn-success');
+                                $('[id^="StatusButton-'+ id +'"]').addClass('btn-danger');
+                            }else{
+                                toastr.success('Banner Disabled successfully','',{timeOut:2000})
+                                document.getElementById(`StatusButton-${id}`).innerHTML = 'Enable'
+                                $('[id^="StatusButton-'+ id +'"]').removeClass('btn-danger');
+                                $('[id^="StatusButton-'+ id +'"]').addClass('btn-success');
+                            }
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>

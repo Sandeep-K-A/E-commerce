@@ -1,0 +1,185 @@
+
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Coupon List </h2>
+            <p>List of all Coupons.</p>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <!-- <header class="card-header">
+            <div class="row gx-3">
+                <div class="col-lg-4 col-md-6 me-auto">
+                    <input type="text" placeholder="Search..." class="form-control">
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Status</option>
+                        <option>Active</option>
+                        <option>Blocked</option>
+                        <option>Show all</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <select class="form-select">
+                        <option>Show 20</option>
+                        <option>Show 30</option>
+                        <option>Show 40</option>
+                    </select>
+                </div>
+            </div>
+        </header>  -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table " >
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th scope="col">CouponName</th>
+                            <th scope="col">CouponCode</th>
+                            <th scope="col">ExpiryDate</th>
+                            <th scope="col">MinAmount</th>
+                            <th scope="col">MaxAmount</th>
+                            <th scope="col">CouponStatus</th>
+                            <th scope="col">DiscountPercentage</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% AllCoupons.forEach((coupon,index)=>{%>
+                            <tr id="coupon-row-<%=coupon._id %>">
+                                <td>
+                                    <%=index+1 %>
+                                </td>
+                                <td id="coupon-name-<%=coupon._id%>"><b>
+                                        <%=coupon.CouponName %>
+                                    </b></td>
+                                <td>
+                                    <%=coupon.CouponCode %>
+                                </td>
+                                <td>
+                                    <% const date=new Date(coupon.ExpiryDate); %>
+                                        <%=`${date.toLocaleDateString()}` %>
+                                </td>
+                                <td>
+                                    <%=coupon.MinAmount %>
+                                </td>
+                                <td>
+                                    <%=coupon.MaxAmount %>
+                                </td>
+                                <td>
+                                    <%=coupon.Status %>
+                                </td>
+                                <td>
+                                    <%=coupon.Percentage %>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm rounded btn-primary font-sm " href="/admin/edit-coupon/<%=coupon._id%>">Edit</a>
+                                    <% if(coupon.Status){%>
+                                        <a class="btn btn-sm rounded btn-danger font-sm "
+                                        onclick="DisableCoupon('<%=coupon._id%>')">Disable</a>
+                                    <%}else{%>
+                                    <a class="btn btn-sm rounded btn-success font-sm "
+                                        onclick="EnableCoupon('<%=coupon._id%>')">Enable</a>
+                                    <%} %>
+                                </td>
+                            </tr>
+                            
+                            <%}) %>
+                            
+                    </tbody>
+                </table>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+
+    
+</section>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const coupon = urlParams.get('coupon')
+    const message = urlParams.get('message');
+    const editMessage = urlParams.get('editMessage')
+    if (message) {
+        if (message.startsWith('New Coupon added')) {
+            toastr.success(message, '', { timeOut: 2000 });
+        } else if (message.startsWith('Coupon already exist')) {
+            toastr.error(message, '', { timeOut: 2000 });
+        }
+    }
+
+    if (coupon) {
+        if(coupon.startsWith('The coupon is disabled successfully')){
+            toastr.warning(coupon, '', { timeOut: 2000 })
+        }else if(coupon.startsWith('The coupon is enabled successfully')){
+            toastr.success(coupon, '', { timeOut: 2000 })
+        }
+    }
+
+    if(editMessage){
+        if(editMessage.startsWith('Coupon details updated Successfully..')){
+            toastr.success(editMessage,'',{timeOut:2000})
+        }else if(editMessage.startsWith('Coupon details Updation Operation failed..!!')){
+            toastr.error(editMessage,'',{timeOut:2000})
+        }
+    }
+
+    function DisableCoupon(id) {
+        // let couponName = document.getElementById(`coupon-name-${id}`).innerHTML
+        Swal.fire({
+            title: 'Are you sure you want to disable this Coupon?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/admin/delete-coupon/${id}`,
+                    method: 'get',
+                    success: (response) => {
+                        if (response.status) {
+                            const coupon = `The coupon is disabled successfully`
+                            const url = `/admin/coupons?coupon=${encodeURIComponent(coupon)}`
+                            location.href = url
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function EnableCoupon(id) {
+        let couponName = document.getElementById(`coupon-name-${id}`).innerHTML
+        Swal.fire({
+            title: 'Are you sure you want to enable this Coupon?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `/admin/delete-coupon/${id}`,
+                    method: 'get',
+                    success: (response) => {
+                        if (response.status) {
+                            const coupon = `The coupon is enabled successfully`
+                            const url = `/admin/coupons?coupon=${encodeURIComponent(coupon)}`
+                            location.href = url
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+</script>

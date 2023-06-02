@@ -1,0 +1,92 @@
+<section class="content-main mt-80 mb-80 pt-100">
+    <div class="card mx-auto card-login" style="width: 30rem;">
+        <div class="card-body">
+            <h4 class="card-title mb-4"></h4>
+            <form action="/otpverify" method="post">
+                <div class="mb-3">
+                    <input class="form-control" id="otp" placeholder="Enter OTP" type="text" name="otp"
+                        onkeyup="return validateOtp()">
+                    <% if (locals.err) { %>
+                        <span id="otpError" style="color: red; font-size: 12px; margin-top: 5px;">
+                            <%=err %>
+                        </span>
+                        <% } %>
+                            <span id="validateError" style="color: red; font-size: 12px; margin-top: 5px;"></span>
+                </div> <!-- form-group// -->
+                <div style="display: flex;justify-content: space-between;">
+                    <div>Resend otp in <span id="timer">00:10</span> minutes!</div>
+                    <a href="#" style="float: right; display: none;" id="submitLink" onclick="resendOtp('<%=locals.phone %>')">resend
+                        otp</a>
+                </div>
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-primary w-100">Signin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    function validateOtp() {
+        const otp = document.getElementById('otp').value
+        const regExp = /^\d{4}$/;
+        if (!regExp.test(otp)) {
+            document.getElementById('validateError').innerHTML = "Enter Valid 4 digits OTP"
+            return false;
+        } else {
+
+            document.getElementById('validateError').innerHTML = ""
+            return true;
+        }
+    }
+
+    function resendOtp(phone) {
+        $.ajax({
+            url: '/otpsignin',
+            type: 'post',
+            data: ({ phone: phone, resend: true }),
+            success: ((response) => {
+                console.log(response)
+                if (response.status) {
+                    var threeMinutes = 10,
+                        display = document.getElementById('timer');
+                    startTimer(threeMinutes, display);
+                    document.getElementById('submitLink').style.display='none'
+                }
+            })
+        })
+    }
+
+    var timerInterval; // Declare a variable to store the interval ID
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+                stopTimer()
+                document.getElementById('submitLink').style.display='block'
+            }
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval); // Clear the interval using the stored interval ID
+    }
+
+    window.onload = function () {
+        var threeMinutes = 10,
+            display = document.getElementById('timer');
+        startTimer(threeMinutes, display);
+
+    };
+
+
+</script>

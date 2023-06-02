@@ -1,0 +1,183 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Add New Product</h2>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Product Details</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/admin/editproduct" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">Product Title</label>
+                            <input type="text" name="productTitle" placeholder="" value="<%=product.ProductTitle %>" class="form-control" id="product_name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Product Description</label>
+                            <textarea placeholder=""  name="productDescription" class="form-control" rows="4"><%=product.ProductDescription %></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">Product Price</label>
+                                    <div class="row gx-2">
+                                        <input placeholder="" value="<%=product.ProductPricing %>" type="text" name="productPrice" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Product Id</label>
+                                    <div class="row gx-2">
+                                        <input placeholder="" value="<%=product._id %>" type="text" hidden  name="productId" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">Product Quantity</label>
+                                    <input placeholder="" value="<%=product.ProductQuantity %>" type="text" name="productQuantity" class="form-control">
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4">
+                                <label class="form-label">Stock Status</label>
+                                <select class="form-select" name="productStatus">
+                                    
+                                        <option value="outofStock" >outofStock</option>
+                                        <option value="available">available</option>
+                                 
+                                    <option value=" outofStock ">outofStock</option>
+                                    <option value="<%=product.ProductStockStatus %>" >available</option>
+                                    
+                                </select>
+                            </div> -->
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4>Product Images</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-upload">
+                                        <img src="/images/products_image/<%=product.ProductImages[0] %>"   alt="">
+                                        <input class="form-control" type="file" name="productImage" multiple>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4>Product Category</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row gx-2">
+                                        <div class="col-sm-6 mb-3">
+                                            <label class="form-label">Parent Category</label>
+                                            <select class="form-select" name="productCategory">
+                                                <% categories.forEach((category)=>{%>
+                                                    <% if(category.status){%>
+                                                        <option value="<%=category.name %>"><%=category.name %></option>
+                                                    <%} %>
+                                                <%}) %> 
+                                                
+                                            </select>
+                                        </div>
+                                        <!-- <div class="col-sm-6 mb-3">
+                                            <label class="form-label">Sub-category</label>
+                                            <select class="form-select">
+                                                <option> Shirts </option>
+                                                <option> T-Shirts </option>
+                                                <option> Hats & Caps </option>
+                                                <option> FootWear </option>
+                                            </select>
+                                        </div> -->
+                                        <div class="col-lg-4">
+                                            <label class="form-label">Product Cover Image</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox0" value="0" onchange="limitCheckboxSelections()">
+                                                <label class="form-check-label" for="checkbox0">
+                                                  Image 1
+                                                </label>
+                                              </div>
+                                              
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox1" value="1" onchange="limitCheckboxSelections()">
+                                                <label class="form-check-label" for="checkbox1">
+                                                  Image 2
+                                                </label>
+                                              </div>
+                                              
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox2" value="2" onchange="limitCheckboxSelections()">
+                                                <label class="form-check-label" for="checkbox2">
+                                                  Image 3
+                                                </label>
+                                              </div>
+
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox3" value="3" onchange="limitCheckboxSelections()">
+                                                <label class="form-check-label" for="checkbox3">
+                                                  Image 4
+                                                </label>
+                                              </div>
+
+                                              <div id="checkboxError" style="color: red; display: none;">
+                                                Please select at least 2 options.
+                                              </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-md rounded font-sm hover-up " type="submit" style="float: right;">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+function limitCheckboxSelections() {
+  const checkboxes = document.getElementsByName('selectedOptions');
+  const checkedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+
+  if (checkedCount >= 2) {
+    // Limit the selections to 2 checkboxes
+    Array.from(checkboxes).forEach(checkbox => {
+      if (!checkbox.checked) {
+        checkbox.disabled = true;
+      }
+    });
+  } else {
+    // Enable all checkboxes
+    Array.from(checkboxes).forEach(checkbox => {
+      checkbox.disabled = false;
+    });
+  }
+
+  const errorDiv = document.getElementById('checkboxError');
+  if (checkedCount < 2) {
+    // Display the error message if less than 2 checkboxes are selected
+    errorDiv.style.display = 'block';
+  } else {
+    // Hide the error message if 2 or more checkboxes are selected
+    errorDiv.style.display = 'none';
+  }
+}
+
+// Pre-select checkboxes based on data from the database
+const selectedOptions = JSON.parse('<%- JSON.stringify(product.ProductCoverImages) %>');
+selectedOptions.forEach(option => {
+  const checkbox = document.getElementById(`checkbox${option}`);
+  if (checkbox) {
+    checkbox.checked = true;
+  }
+});
+
+// Call the limitCheckboxSelections() function to handle initial selection and limit the checkboxes
+limitCheckboxSelections();
+
+
+</script>
