@@ -714,7 +714,7 @@
         const phone = document.getElementById('UserPhone').value;
         const regExp = /^[1-9]{1}\d{9}$/;
         if(!regExp.test(phone)){
-            document.getElementById('UserPhoneError').innerHTML="Enter a valid Phone";
+            document.getElementById('UserPhoneError').innerHTML="Enter a valid Phone Number";
             return false;
         }else{
             document.getElementById('UserPhoneError').innerHTML = "";
@@ -726,7 +726,7 @@
         const userNewPassword = document.getElementById('UserNewPassword').value;
         // const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/
         const regExp = /^.{8,}$/;
-        if(regExp.test(userNewPassword)){
+        if(!regExp.test(userNewPassword)){
             document.getElementById('UserNewPasswordError').innerHTML="Enter a valid Password";
             return false;
         }else{
