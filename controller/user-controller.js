@@ -408,7 +408,10 @@ module.exports = {
         const userId = req.session.user._id
 
         orderHelpers.fetchOrderDetails(id).then((orderInfo) => {
-            res.render('user/user-orderDetails', { orderInfo })
+            cartHelpers.getcartCount(userId).then((cartCount)=>{
+                res.render('user/user-orderDetails', { orderInfo,cartCount })
+            })
+           
         }).catch((error) => {
             let message = "Error Fetching Order Details.."
             res.render('user/error', { message, log: true })
