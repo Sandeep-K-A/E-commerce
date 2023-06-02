@@ -198,7 +198,10 @@ module.exports = {
         // console.log(id+"jijih")
         cartHelpers.displayCart(id).then((cartItems) => {
             // console.log(cartItems);
-            res.render('user/user-cart', { cartItems, user })
+            cartHelpers.getcartCount(id).then((cartCount)=>{
+                res.render('user/user-cart', { cartItems, user,cartCount })
+            })
+           
         }).catch((error) => {
             console.log('error occured')
             res.render('user/user-cart', { user })
