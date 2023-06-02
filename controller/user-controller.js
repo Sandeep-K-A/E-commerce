@@ -266,12 +266,14 @@ module.exports = {
                 console.log(cartItems)
                 couponHelper.displayCoupons().then((validCoupons) => {
                     orderHelpers.checkWalletAmount(id, cartItems.totalAmount).then((Wallet) => {
+                        cartHelpers.getcartCount(id).then((cartCount)=>{
                         console.log(Wallet, '___________________________userWallet')
                         if (Wallet.validAmount) {
-                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user, Wallet })
+                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user, Wallet,cartCount })
                         } else {
-                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user })
+                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user,cartCount })
                         }
+                    })
                     })
 
                 })
