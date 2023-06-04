@@ -8,7 +8,8 @@ const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const adminRouter = require('./routes/admin');
 const userRouter = require('./routes/user');
-const { isLoggedIn } = require('./middleware/middleware');
+const { processOrderStatus } = require('./middleware/middleware');
+
 require('./config/dbConnection');
 require('dotenv').config()
 
@@ -30,6 +31,7 @@ app.use(function nocache (req,res,next){
   res.header('Pragma', 'no-cache');
   next();
 })
+app.use(processOrderStatus)
 app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(express.json());

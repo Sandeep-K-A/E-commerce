@@ -189,7 +189,7 @@ module.exports = {
                 console.log(order,'dlfjlsdkfjldsjflksdjfl')
                 order.Products.forEach((item)=>{
                     productModel.findOne({_id:item.proId}).then((product)=>{
-                        product.ProductQuantity = item.quantity
+                        product.ProductQuantity += item.quantity
                         if(product.ProductQuantity > 0){
                             product.ProductStockStatus = "available"
                         }
@@ -216,7 +216,7 @@ module.exports = {
             ordersModel.findOne({orderId:orderId}).then((order)=>{
                 order.Products.forEach((item)=>{
                     productModel.findOne({_id:item.proId}).then((product)=>{
-                        product.ProductQuantity = item.quantity
+                        product.ProductQuantity += item.quantity
                         if(product.ProductQuantity > 0){
                             product.ProductStockStatus = "available"
                         }

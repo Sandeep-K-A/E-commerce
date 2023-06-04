@@ -1,6 +1,7 @@
 const {userStatusCheck} = require('../helpers/middleware-helper')
 const {getcartCount} = require('../helpers/cart-helpers');
 const cart = require('../models/cartModel');
+const middlewareHelper = require('../helpers/middleware-helper');
 module.exports = {
 
     isLoggedIn:(req,res,next)=>{
@@ -51,5 +52,12 @@ module.exports = {
         // console.log(req.session)
         next()
       
+    },
+    processOrderStatus:(req,res,next)=>{
+        middlewareHelper.pendingOrders().then(()=>{
+            console.log('Order Status with pending has be removed from the logs....')
+          
+        })
+        next()
     }
 }
