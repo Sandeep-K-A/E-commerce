@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="card mb-4">
-        
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover" id="myTable">
@@ -52,13 +52,15 @@
                                         class="btn btn-sm rounded btn-primary font-sm edit-product"
                                         onclick="getEditBanner(event)">Edit</a>
                                     <% if(banner.bannerStatus){%>
-                                        <a class="btn btn-sm rounded btn-danger font-sm " id="StatusButton-<%=banner._id %>"
+                                        <a class="btn btn-sm rounded btn-danger font-sm "
+                                            id="StatusButton-<%=banner._id %>"
                                             onclick="changeBannerStatus(event,'<%=banner._id%>')">Disable</a>
                                         <%}else{%>
-                                            <a class="btn btn-sm rounded btn-success font-sm " id="StatusButton-<%=banner._id %>"
+                                            <a class="btn btn-sm rounded btn-success font-sm "
+                                                id="StatusButton-<%=banner._id %>"
                                                 onclick="changeBannerStatus(event,'<%=banner._id%>')">Enable</a>
                                             <%} %>
-                                            
+
 
                                 </td>
                             </tr>
@@ -68,7 +70,7 @@
             </div>
         </div>
     </div>
-    
+
 </section>
 <script>
 
@@ -108,10 +110,10 @@
     function changeBannerStatus(event, id) {
         event.preventDefault();
         let text
-        if(document.getElementById(`StatusButton-${id}`).innerHTML == 'Disable'){
-             text = 'Are you sure you want to disable this Banner ?'
-        }else{
-             text = 'Are you sure you want to enable this Banner ?'
+        if (document.getElementById(`StatusButton-${id}`).innerHTML == 'Disable') {
+            text = 'Are you sure you want to disable this Banner ?'
+        } else {
+            text = 'Are you sure you want to enable this Banner ?'
         }
         Swal.fire({
             title: text,
@@ -119,25 +121,25 @@
             showCancelButton: true,
             confirmButtonText: 'Yes, do it!',
             cancelButtonText: 'No, cancel',
-        }).then((result)=>{
-            if(result.isConfirmed){
+        }).then((result) => {
+            if (result.isConfirmed) {
                 $.ajax({
-                    url:`/admin/delete-banner/${id}`,
-                    method:'get',
-                    success:(response)=>{
-                        if(response.Status){
+                    url: `/admin/delete-banner/${id}`,
+                    method: 'get',
+                    success: (response) => {
+                        if (response.Status) {
                             const bannerStatus = document.getElementById(`BannerStatus-${id}`)
                             bannerStatus.innerHTML = response.banner.bannerStatus;
-                            if(response.banner.bannerStatus === true){
-                                toastr.success('Banner enabled successfully','',{timeOut:2000})
+                            if (response.banner.bannerStatus === true) {
+                                toastr.success('Banner enabled successfully', '', { timeOut: 2000 })
                                 document.getElementById(`StatusButton-${id}`).innerHTML = 'Disable'
-                                $('[id^="StatusButton-'+ id +'"]').removeClass('btn-success');
-                                $('[id^="StatusButton-'+ id +'"]').addClass('btn-danger');
-                            }else{
-                                toastr.success('Banner Disabled successfully','',{timeOut:2000})
+                                $('[id^="StatusButton-' + id + '"]').removeClass('btn-success');
+                                $('[id^="StatusButton-' + id + '"]').addClass('btn-danger');
+                            } else {
+                                toastr.success('Banner Disabled successfully', '', { timeOut: 2000 })
                                 document.getElementById(`StatusButton-${id}`).innerHTML = 'Enable'
-                                $('[id^="StatusButton-'+ id +'"]').removeClass('btn-danger');
-                                $('[id^="StatusButton-'+ id +'"]').addClass('btn-success');
+                                $('[id^="StatusButton-' + id + '"]').removeClass('btn-danger');
+                                $('[id^="StatusButton-' + id + '"]').addClass('btn-success');
                             }
                         }
                     }

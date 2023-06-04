@@ -11,7 +11,7 @@
                     <h4> Edit Banner Details</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" id="edit-banner"  enctype="multipart/form-data">
+                    <form method="post" id="edit-banner" enctype="multipart/form-data">
                         <div class="mb-4">
                             <label for="product_name" class="form-label">BannerHeader</label>
                             <input type="text" name="BannerHeader" value="<%=banner.bannerMainHeader%>"
@@ -20,12 +20,13 @@
                         <div class="mb-4">
                             <label for="product_name" class="form-label">Banner Description 1</label>
                             <textarea placeholder="" value="<%=banner.bannerDescription %>" name="BannerDescription1"
-                                class="form-control" rows="4" id="BannerDescription1" ><%=banner.bannerDescription %></textarea>
+                                class="form-control" rows="4"
+                                id="BannerDescription1"><%=banner.bannerDescription %></textarea>
                             <div class="mb-4">
                                 <label class="form-label">Banner Description 2</label>
                                 <textarea placeholder="" value="<%=banner.bannerSubDescription %>"
-                                    name="BannerDescription2" class="form-control"
-                                    rows="4" id="BannerDescription2" ><%=banner.bannerSubDescription %></textarea>
+                                    name="BannerDescription2" class="form-control" rows="4"
+                                    id="BannerDescription2"><%=banner.bannerSubDescription %></textarea>
                             </div>
                             <div class="mb-4">
                                 <label for="product_name" class="form-label">BannerLink</label>
@@ -40,8 +41,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="input-upload">
-                                                <img src="/assets/imgs/slider/<%=banner.bannerImage %>" id="imagePreview1"
-                                                    alt="">
+                                                <img src="/assets/imgs/slider/<%=banner.bannerImage %>"
+                                                    id="imagePreview1" alt="">
                                                 <input class="form-control" type="file" name="BannerImage"
                                                     id="BannerImage">
                                             </div>
@@ -67,9 +68,9 @@
         // console.log(form);
         event.preventDefault()
         const formData = new FormData($('#edit-banner')[0])
-       
+
         console.log([...formData])
-        
+
         $.ajax({
             url: '/admin/edit-banner',
             method: 'post',
@@ -78,10 +79,10 @@
             contentType: false,
             success: (response) => {
                 console.log(response)
-                if(response.Status || response.updated){
+                if (response.Status || response.updated) {
                     const editMsg = 'Banner details updated Successfully'
                     const url = `/admin/banners?editMsg=${encodeURIComponent(editMsg)}`
-                    location.href=url;
+                    location.href = url;
                 }
             }
         })

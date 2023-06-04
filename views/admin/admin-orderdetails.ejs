@@ -1,16 +1,18 @@
 <section class="content-main">
-  <div class="content-header" >
-      <div>
-          <h2 class="content-title card-title">Order detail</h2>
-          <p>Details for Order ID: <%= orderInfo.orderId %> </p>
-      </div>
-  </div>
-  <div class="card">
-      <header class="card-header">
-          <div class="row align-items-center">
-              <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
-                  <span>
-                      <i class="material-icons md-calendar_today"></i> <b><% const [day,month,date,year] = orderInfo.createdAt.toString().split(' ') %>
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Order detail</h2>
+            <p>Details for Order ID: <%= orderInfo.orderId %>
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <header class="card-header">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+                    <span>
+                        <i class="material-icons md-calendar_today"></i> <b>
+                            <% const [day,month,date,year]=orderInfo.createdAt.toString().split(' ') %>
                         <%= `${date}-${month}-${year}, ${day}` %></b>
                   </span> <br>
                   
@@ -111,29 +113,31 @@
                                           <dl class="dlist">
                                               <dt class="text-muted">Status:</dt>
                                               <dd>
-                                                <% if(orderInfo.Status=='Pending') { %>
-                                                  <span class="badge rounded-pill alert-danger text-danger">Payment Incomplete</span>
-                                                  <% }else if(orderInfo.Status=== 'Returned' || orderInfo.Status=== 'Cancelled' ) { %>
-                                                    <span class="badge rounded-pill alert-success text-success">Refund to Wallet</span>
-                                                      <% }else if(orderInfo.PaymentMethod==='COD') { %>
-                                                        <span class="badge rounded-pill alert-success text-success">Cash On Delivery</span>
-                                                        <% }else{ %>
-                                                        <span class="badge rounded-pill alert-success text-success">Payment Done</span>
-                                                            <% } %>
-                                              </dd>
-                                          </dl>
-                                      </article>
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div> <!-- table-responsive// -->
-              </div> <!-- col// -->
-              <div class="col-lg-1"></div>
-              
-                  
-              
-          </div>
-      </div> 
-  </div> 
-</section> 
+                                                <% if(orderInfo.Status==' Pending') { %>
+                                <span class="badge rounded-pill alert-danger text-danger">Payment Incomplete</span>
+                                <% }else if(orderInfo.Status==='Returned' || orderInfo.Status==='Cancelled' ) { %>
+                                    <span class="badge rounded-pill alert-success text-success">Refund to Wallet</span>
+                                    <% }else if(orderInfo.PaymentMethod==='COD' ) { %>
+                                        <span class="badge rounded-pill alert-success text-success">Cash On
+                                            Delivery</span>
+                                        <% }else{ %>
+                                            <span class="badge rounded-pill alert-success text-success">Payment
+                                                Done</span>
+                                            <% } %>
+                                                </dd>
+                                                </dl>
+                                                </article>
+                                                </td>
+                                                </tr>
+                                                </tbody>
+                                                </table>
+                </div> <!-- table-responsive// -->
+            </div> <!-- col// -->
+            <div class="col-lg-1"></div>
+
+
+
+    </div>
+    </div>
+    </div>
+</section>

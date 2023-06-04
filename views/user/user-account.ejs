@@ -12,33 +12,33 @@
             </div>
         </div>
         <div class="mobile-header-content-area">
-        
+
             <div class="mobile-menu-wrap mobile-header-border">
-                
+
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
-                            
+
                         </li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
-                            
+
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- mobile menu end -->
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a  href="page-contact.html"> Our location </a>
+                    <a href="page-contact.html"> Our location </a>
                 </div>
                 <div class="single-mobile-header-info">
                     <% if (locals.user){%>
                         <a href="/logout">Hi <%= user.name %> | logout</a>
-                    <%}else{%>
-                       </i><a href="/signin">Log In / Sign Up</a>
-                    <%} %>
+                        <%}else{%>
+                            </i><a href="/signin">Log In / Sign Up</a>
+                            <%} %>
                 </div>
                 <div class="single-mobile-header-info">
                     <a href="#">(+01) - 2345 - 6789 </a>
@@ -119,11 +119,12 @@
                                             <p>From your account dashboard. you can easily check &amp; view your
                                                 <a>recent orders</a>, manage your <a>shipping and
                                                     billing addresses</a> and <a>edit your password and account
-                                                    details.</a></p>
+                                                    details.</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="tab-pane fade" id="track-orders" role="tabpanel"
                                     aria-labelledby="track-orders-tab">
                                     <div class="card">
@@ -200,63 +201,79 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <!-- Your form goes here -->
-                                                                <form method="POST" id="edit-address-<%=index %>" onsubmit="return validateEditAddress('<%=index %>')">
+                                                                <form method="POST" id="edit-address-<%=index %>"
+                                                                    onsubmit="return validateEditAddress('<%=index %>')">
                                                                     <div class="form-group">
                                                                         <label for="FullName">Full Name</label>
                                                                         <input type="text" class="form-control"
                                                                             id="FullName" name="FullName"
-                                                                            value="<%=item.FullName %>" required onkeyup="return validateName()">
-                                                                            <span id="FullNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.FullName %>" required
+                                                                            onkeyup="return validateName()">
+                                                                        <span id="FullNameError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
 
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="HouseAddress">House Address</label>
                                                                         <input type="text" class="form-control"
                                                                             id="HouseAddress" name="HouseAddress"
-                                                                            value="<%=item.HouseAddress %>" required onkeyup="return validateHouseAddress()">
-                                                                            <span id="AddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.HouseAddress %>" required
+                                                                            onkeyup="return validateHouseAddress()">
+                                                                        <span id="AddressError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="City">City</label>
                                                                         <input type="text" class="form-control"
                                                                             id="City" name="City"
-                                                                            value="<%=item.City %>" required onkeyup="return validateCity()">
-                                                                            <span id="CityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.City %>" required
+                                                                            onkeyup="return validateCity()">
+                                                                        <span id="CityError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="State">State</label>
                                                                         <input type="text" class="form-control"
                                                                             id="State" name="State"
-                                                                            value="<%=item.State %>" required onkeyup="return validateState()">
-                                                                            <span id="StateError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.State %>" required
+                                                                            onkeyup="return validateState()">
+                                                                        <span id="StateError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="PostalCode">Postal Code</label>
                                                                         <input type="text" class="form-control"
                                                                             id="PostalCode" name="PostalCode"
-                                                                            value="<%=item.PostalCode %>" required onkeyup="return validatePostalCode()">
-                                                                            <span id="PostalCodeError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.PostalCode %>" required
+                                                                            onkeyup="return validatePostalCode()">
+                                                                        <span id="PostalCodeError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="Phone">Phone</label>
                                                                         <input type="text" class="form-control"
                                                                             id="Phone" name="Phone"
-                                                                            value="<%=item.Phone %>" required onkeyup="return validatePhone()">
-                                                                            <span id="PhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.Phone %>" required
+                                                                            onkeyup="return validatePhone()">
+                                                                        <span id="PhoneError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="email">e-mail</label>
                                                                         <input type="text" class="form-control"
                                                                             id="email" name="email"
-                                                                            value="<%=item.Email %>" required onkeyup="return validateEmail()">
-                                                                            <span id="EmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                            value="<%=item.Email %>" required
+                                                                            onkeyup="return validateEmail()">
+                                                                        <span id="EmailError"
+                                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                     </div>
                                                                     <input type="text" name="addressId"
                                                                         value="<%=item._id %>" hidden>
                                                                     <button type="submit" class="btn btn-primary"
                                                                         onclick="updateAddress(event,'<%=index%>')">Save
                                                                         Changes</button>
-                                                                        <span id="EditAddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                                    <span id="EditAddressError"
+                                                                        style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -305,43 +322,56 @@
                                                     <div class="form-group col-md-12">
                                                         <label>Display Name <span class="required"></span></label>
                                                         <input required="" class="form-control square" name="UserName"
-                                                            value="<%=userDetails.name %>" type="text" id="UserName" onkeyup="return validateUserName()">
-                                                            <span id="UserNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            value="<%=userDetails.name %>" type="text" id="UserName"
+                                                            onkeyup="return validateUserName()">
+                                                        <span id="UserNameError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Email Address <span class="required"></span></label>
                                                         <input required="" class="form-control square" name="UserEmail"
-                                                            value="<%=userDetails.email %>" type="email" id="UserEmail" onkeyup="return validateUserEmail()">
-                                                            <span id="UserEmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            value="<%=userDetails.email %>" type="email" id="UserEmail"
+                                                            onkeyup="return validateUserEmail()">
+                                                        <span id="UserEmailError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Phone Number <span class="required"></span></label>
                                                         <input required="" class="form-control square" name="UserPhone"
-                                                            id="UserPhone" value="<%=userDetails.phone %>" onkeyup="return validateUserPhone()">
-                                                            <span id="UserPhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            id="UserPhone" value="<%=userDetails.phone %>"
+                                                            onkeyup="return validateUserPhone()">
+                                                        <span id="UserPhoneError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Current Password <span class="required">*</span></label>
                                                         <input required="" class="form-control square"
-                                                            name="UserPassword" type="password" id="UserPassword" onkeyup="return validateUserPassword()">
-                                                            <span id="UserPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            name="UserPassword" type="password" id="UserPassword"
+                                                            onkeyup="return validateUserPassword()">
+                                                        <span id="UserPasswordError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>New Password <span class="required">*</span></label>
                                                         <input class="form-control square" name="UserNewPassword"
-                                                            type="password" id="UserNewPassword" onkeyup="return validateUserNewPassword()">
-                                                            <span id="UserNewPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            type="password" id="UserNewPassword"
+                                                            onkeyup="return validateUserNewPassword()">
+                                                        <span id="UserNewPasswordError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Confirm Password <span class="required">*</span></label>
                                                         <input class="form-control square" name="UserConfirmPassword"
-                                                            type="password" id="UserConfirmPassword" onkeyup="return validateConfirmPassword()">
-                                                            <span id="UserConfirmPasswordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                            type="password" id="UserConfirmPassword"
+                                                            onkeyup="return validateConfirmPassword()">
+                                                        <span id="UserConfirmPasswordError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <button type="submit" class="btn btn-fill-out submit"
                                                             name="submit" value="Submit">Save</button>
-                                                            <span id="UserAccountDetailsError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                                        <span id="UserAccountDetailsError"
+                                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                                     </div>
                                                 </div>
                                             </form>
@@ -359,98 +389,98 @@
 <script>
     function updateAddress(event, index) {
         event.preventDefault()
-        if (!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() || !validatePhone() || !validateEmail()){
+        if (!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() || !validatePhone() || !validateEmail()) {
             document.getElementById('EditAddressError').innerHTML = "Please Complete all Fields"
             return false
-        }else{
+        } else {
 
-        
-        $.ajax({
-            url: '/edit-address',
-            method: 'post',
-            data: $(`#edit-address-${index}`).serialize(),
-            success: (response) => {
-                console.log(response)
-                if (response.status) {
-                    // let modal = document.getElementById(`editAddressModal${index}`)
-                    // modal.style.display = 'none';
-                    $('#editAddressModal' + index).modal('hide');
-                    document.getElementById(`FullName-${index}`).innerText = response.address.FullName;
-                    document.getElementById(`HouseAddress-${index}`).innerText = response.address.HouseAddress;
-                    document.getElementById(`Email-${index}`).innerText = response.address.Email;
-                    document.getElementById(`Phone-${index}`).innerText = response.address.Phone;
-                    document.getElementById(`City-${index}`).innerText = response.address.City;
-                    document.getElementById(`State-${index}`).innerText = response.address.State;
-                    document.getElementById(`PostalCode-${index}`).innerText = response.address.PostalCode;
-                    toastr.success('Address updated Successfully', '', {
-                        positionClass: 'toast-top-right',
-                        width: '100px',
-                        timeOut: 2000
-                    })
 
-                } else {
-                    // let modal = document.getElementById(`editAddressModal${index}`)
-                    // modal.style.display = 'none';
-                    $('#editAddressModal' + index).modal('hide');
-                    toastr.error('Error updating Address', '', {
-                        positionClass: 'toast-top-right',
-                        width: '100px',
-                        timeOut: 2000
-                    })
+            $.ajax({
+                url: '/edit-address',
+                method: 'post',
+                data: $(`#edit-address-${index}`).serialize(),
+                success: (response) => {
+                    console.log(response)
+                    if (response.status) {
+                        // let modal = document.getElementById(`editAddressModal${index}`)
+                        // modal.style.display = 'none';
+                        $('#editAddressModal' + index).modal('hide');
+                        document.getElementById(`FullName-${index}`).innerText = response.address.FullName;
+                        document.getElementById(`HouseAddress-${index}`).innerText = response.address.HouseAddress;
+                        document.getElementById(`Email-${index}`).innerText = response.address.Email;
+                        document.getElementById(`Phone-${index}`).innerText = response.address.Phone;
+                        document.getElementById(`City-${index}`).innerText = response.address.City;
+                        document.getElementById(`State-${index}`).innerText = response.address.State;
+                        document.getElementById(`PostalCode-${index}`).innerText = response.address.PostalCode;
+                        toastr.success('Address updated Successfully', '', {
+                            positionClass: 'toast-top-right',
+                            width: '100px',
+                            timeOut: 2000
+                        })
+
+                    } else {
+                        // let modal = document.getElementById(`editAddressModal${index}`)
+                        // modal.style.display = 'none';
+                        $('#editAddressModal' + index).modal('hide');
+                        toastr.error('Error updating Address', '', {
+                            positionClass: 'toast-top-right',
+                            width: '100px',
+                            timeOut: 2000
+                        })
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
     }
 
     $('#Account_form').submit((event) => {
         event.preventDefault()
-        if(!validateUserName() || !validateUserEmail() || !validateUserPassword() || !validateUserNewPassword() || !validateConfirmPassword()){
+        if (!validateUserName() || !validateUserEmail() || !validateUserPassword() || !validateUserNewPassword() || !validateConfirmPassword()) {
             document.getElementById('UserAccountDetailsError').innerHTML = "Please Fix all above errors!"
             return false;
-        }else{
+        } else {
 
-        
-        Swal.fire({
-            title: `Are you sure you want edit the user Account details?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, do it!',
-            cancelButtonText: 'No, cancel',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/update-account',
-                    method: 'post',
-                    data: $('#Account_form').serialize(),
-                    success: (response) => {
-                        console.log(response)
-                        if (response.Status && response.passChange) {
-                            document.getElementById(`UserName`).innerText = response.user.name;
-                            document.getElementById(`UserEmail`).innerText = response.user.email;
-                            document.getElementById(`UserPhone`).innerText = response.user.phone;
-                            document.getElementById(`UserPassword`).innerText = '';
-                            toastr.success('Account Details updated with new Password', '', {
-                                positionClass: 'toast-top-right',
-                                width: '100px',
-                                timeOut: 2000
-                            })
-                        } else {
-                            document.getElementById(`UserName`).innerText = response.user.name;
-                            document.getElementById(`UserEmail`).innerText = response.user.email;
-                            document.getElementById(`UserPhone`).innerText = response.user.phone;
-                            document.getElementById(`UserPassword`).value = '';
-                            toastr.success('Account Details updated successfully', '', {
-                                positionClass: 'toast-top-right',
-                                width: '100px',
-                                timeOut: 2000
-                            })
+
+            Swal.fire({
+                title: `Are you sure you want edit the user Account details?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, do it!',
+                cancelButtonText: 'No, cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/update-account',
+                        method: 'post',
+                        data: $('#Account_form').serialize(),
+                        success: (response) => {
+                            console.log(response)
+                            if (response.Status && response.passChange) {
+                                document.getElementById(`UserName`).innerText = response.user.name;
+                                document.getElementById(`UserEmail`).innerText = response.user.email;
+                                document.getElementById(`UserPhone`).innerText = response.user.phone;
+                                document.getElementById(`UserPassword`).innerText = '';
+                                toastr.success('Account Details updated with new Password', '', {
+                                    positionClass: 'toast-top-right',
+                                    width: '100px',
+                                    timeOut: 2000
+                                })
+                            } else {
+                                document.getElementById(`UserName`).innerText = response.user.name;
+                                document.getElementById(`UserEmail`).innerText = response.user.email;
+                                document.getElementById(`UserPhone`).innerText = response.user.phone;
+                                document.getElementById(`UserPassword`).value = '';
+                                toastr.success('Account Details updated successfully', '', {
+                                    positionClass: 'toast-top-right',
+                                    width: '100px',
+                                    timeOut: 2000
+                                })
+                            }
                         }
-                    }
-                })
-            }
-        })
-    }
+                    })
+                }
+            })
+        }
     })
 
     function validateName() {
@@ -539,75 +569,75 @@
         }
     }
 
-    function validateUserName(){
+    function validateUserName() {
         const userName = document.getElementById('UserName').value;
         const regExp = /^[a-zA-Z ]*$/;
-        if(!regExp.test(userName)){
-            document.getElementById('UserNameError').innerHTML="Enter a Valid Name"
+        if (!regExp.test(userName)) {
+            document.getElementById('UserNameError').innerHTML = "Enter a Valid Name"
             return false;
-        }else{
+        } else {
             document.getElementById('UserNameError').innerHTML = "";
             return true;
         }
     }
 
-    function validateUserEmail(){
+    function validateUserEmail() {
         const email = document.getElementById('UserEmail').value;
         const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
-        if(!regExp.test(email)){
+        if (!regExp.test(email)) {
             document.getElementById('UserEmailError').innerHTML = "Enter a valid e-mail"
             return false;
-        }else{
+        } else {
             document.getElementById('UserEmailError').innerHTML = "";
             return true;
         }
     }
 
-    function validateUserPassword(){
+    function validateUserPassword() {
         const password = document.getElementById('UserPassword').value;
         // const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/
         const regExp = /^.{8,}$/;
-        if(!regExp.test(password)){
+        if (!regExp.test(password)) {
             document.getElementById('UserPasswordError').innerHTML = "Enter a valid Password"
             return false;
-        }else{
+        } else {
             document.getElementById('UserPasswordError').innerHTML = "";
             return true;
         }
     }
 
-    function validateUserPhone(){
+    function validateUserPhone() {
         const phone = document.getElementById('UserPhone').value;
         const regExp = /^[1-9]{1}\d{9}$/;
-        if(!regExp.test(phone)){
-            document.getElementById('UserPhoneError').innerHTML="Enter a valid Phone Number";
+        if (!regExp.test(phone)) {
+            document.getElementById('UserPhoneError').innerHTML = "Enter a valid Phone Number";
             return false;
-        }else{
+        } else {
             document.getElementById('UserPhoneError').innerHTML = "";
             return true;
         }
     }
 
-    function validateUserNewPassword(){
+    function validateUserNewPassword() {
         const userNewPassword = document.getElementById('UserNewPassword').value;
         // const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/
         const regExp = /^.{8,}$/;
-        if(!regExp.test(userNewPassword)){
-            document.getElementById('UserNewPasswordError').innerHTML="Enter a valid Password";
+        if (!regExp.test(userNewPassword)) {
+            document.getElementById('UserNewPasswordError').innerHTML = "Enter a valid Password";
             return false;
-        }else{
+        } else {
             document.getElementById('UserNewPasswordError').innerHTML = "";
             return true;
         }
     }
-    
-    function validateConfirmPassword(){
+
+    function validateConfirmPassword() {
         const confirmPassword = document.getElementById('UserConfirmPassword').value;
         const passCheck = document.getElementById('UserNewPassword').value;
-        if(passCheck!==confirmPassword){
-            document.getElementById('UserConfirmPasswordError').innerHTML="Enter the same Password as above";
+        if (passCheck !== confirmPassword) {
+            document.getElementById('UserConfirmPasswordError').innerHTML = "Enter the same Password as above";
             return false;
-        }else{
+        } else {
             document.getElementById('UserConfirmPasswordError').innerHTML = "";
             return true;
         }

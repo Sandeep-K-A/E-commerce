@@ -12,33 +12,33 @@
             </div>
         </div>
         <div class="mobile-header-content-area">
-            
+
             <div class="mobile-menu-wrap mobile-header-border">
-                
+
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
-                            
+
                         </li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
-                            
+
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- mobile menu end -->
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a  href="page-contact.html"> Our location </a>
+                    <a href="page-contact.html"> Our location </a>
                 </div>
                 <div class="single-mobile-header-info">
                     <% if (locals.user){%>
                         <a href="/logout">Hi <%= user.name %> | logout</a>
-                    <%}else{%>
-                       </i><a href="/signin">Log In / Sign Up</a>
-                    <%} %>
+                        <%}else{%>
+                            </i><a href="/signin">Log In / Sign Up</a>
+                            <%} %>
                 </div>
                 <div class="single-mobile-header-info">
                     <a href="#">(+01) - 2345 - 6789 </a>
@@ -65,16 +65,16 @@
                 <div class="col-md-4">
                     <label for="sortField">Sort By:</label>
                     <select id="sortField" class="form-select">
-                        <option value="createdAt" <% if(sortField === 'createdAt') { %>selected<% } %>>Date</option>
-                        <option value="Status" <% if(sortField === 'Status') { %>selected<% } %>>Status</option>
+                        <option value="createdAt" <% if(sortField==='createdAt' ) { %>selected<% } %>>Date</option>
+                        <option value="Status" <% if(sortField==='Status' ) { %>selected<% } %>>Status</option>
                         <!-- Add more sorting options if needed -->
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="sortOrder">Sort Order:</label>
                     <select id="sortOrder" class="form-select">
-                        <option value="asc" <% if(sortOrder === 'asc') { %>selected<% } %>>Ascending</option>
-                        <option value="desc" <% if(sortOrder === 'desc') { %>selected<% } %>>Descending</option>
+                        <option value="asc" <% if(sortOrder==='asc' ) { %>selected<% } %>>Ascending</option>
+                        <option value="desc" <% if(sortOrder==='desc' ) { %>selected<% } %>>Descending</option>
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -142,26 +142,24 @@
                                         <%=items.TotalAmount %> for <%=items.Products.length %> item
                                     </td>
                                     <td class="button-td">
-                                      
 
-                                                    <% if(items.Status=='Delivered' ){%>
-                                                        <button id="returnButton-<%=items.orderId %>"
-                                                            class="btn btn-sm btn-secondary"
-                                                            onclick="returnOrder('<%=items.orderId%>')">
-                                                            <i class="fi-rs-shopping-bag mr-5"></i>Return order
-                                                        </button>
-                                                        <%}else if(items.Status=='Placed' || items.Status=='Intransit'
-                                                            ){%>
-                                                            <button id="cancelButton-<%=items.orderId %>"
-                                                                class="btn btn-sm"
-                                                                onclick="cancelOrder('<%=items.orderId%>')">
-                                                                <i class="fi-rs-shopping-bag mr-5"></i>Cancel order
-                                                            </button>
-                                                            <%}else if(items.Status=='Cancelled' ){%>
-                                                                OrderCancelled
-                                                                <%}else{%>
-                                                                    OrderReturned
-                                                                    <%} %>
+
+                                        <% if(items.Status=='Delivered' ){%>
+                                            <button id="returnButton-<%=items.orderId %>"
+                                                class="btn btn-sm btn-secondary"
+                                                onclick="returnOrder('<%=items.orderId%>')">
+                                                <i class="fi-rs-shopping-bag mr-5"></i>Return order
+                                            </button>
+                                            <%}else if(items.Status=='Placed' || items.Status=='Intransit' ){%>
+                                                <button id="cancelButton-<%=items.orderId %>" class="btn btn-sm"
+                                                    onclick="cancelOrder('<%=items.orderId%>')">
+                                                    <i class="fi-rs-shopping-bag mr-5"></i>Cancel order
+                                                </button>
+                                                <%}else if(items.Status=='Cancelled' ){%>
+                                                    OrderCancelled
+                                                    <%}else{%>
+                                                        OrderReturned
+                                                        <%} %>
                                     </td>
                                 </tr>
                                 <%}) %>
@@ -169,24 +167,29 @@
                     </table>
                 </div>
                 <nav>
-  <ul class="pagination justify-content-center">
-    <% if (currentPage > 1) { %>
-    <li class="page-item">
-      <a class="page-link" style="color: green;" href="?page=<%= currentPage - 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Previous</a>
-    </li>
-    <% } %>
-    <% for (let i = 1; i <= totalPages; i++) { %>
-    <li class="page-item <% if (i === currentPage) { %>active<% } %>">
-      <a class="page-link" style="color: black;" href="?page=<%= i %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>"><%= i %></a>
-    </li>
-    <% } %>
-    <% if (currentPage < totalPages) { %>
-    <li class="page-item">
-      <a class="page-link" style="color: green;" href="?page=<%= currentPage + 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Next</a>
-    </li>
-    <% } %>
-  </ul>
-</nav>
+                    <ul class="pagination justify-content-center">
+                        <% if (currentPage> 1) { %>
+                            <li class="page-item">
+                                <a class="page-link" style="color: green;"
+                                    href="?page=<%= currentPage - 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Previous</a>
+                            </li>
+                            <% } %>
+                                <% for (let i=1; i <=totalPages; i++) { %>
+                                    <li class="page-item <% if (i === currentPage) { %>active<% } %>">
+                                        <a class="page-link" style="color: black;"
+                                            href="?page=<%= i %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                    <% } %>
+                                        <% if (currentPage < totalPages) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" style="color: green;"
+                                                    href="?page=<%= currentPage + 1 %>&sortField=<%= sortField %>&sortOrder=<%= sortOrder %>&searchQuery=<%= searchQuery %>">Next</a>
+                                            </li>
+                                            <% } %>
+                    </ul>
+                </nav>
 
                 <%}else{%>
                     <h3> You have no Orders..!!</h3>

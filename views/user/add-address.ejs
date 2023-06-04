@@ -12,33 +12,33 @@
             </div>
         </div>
         <div class="mobile-header-content-area">
-        
+
             <div class="mobile-menu-wrap mobile-header-border">
-                
+
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
-                           
+
                         </li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
-                            
+
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- mobile menu end -->
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a  href="page-contact.html"> Our location </a>
+                    <a href="page-contact.html"> Our location </a>
                 </div>
                 <div class="single-mobile-header-info">
                     <% if (locals.user){%>
                         <a href="/logout">Hi <%= user.name %> | logout</a>
-                    <%}else{%>
-                       </i><a href="/signin">Log In / Sign Up</a>
-                    <%} %>
+                        <%}else{%>
+                            </i><a href="/signin">Log In / Sign Up</a>
+                            <%} %>
                 </div>
                 <div class="single-mobile-header-info">
                     <a href="#">(+01) - 2345 - 6789 </a>
@@ -64,31 +64,38 @@
                 </div>
                 <form method="post" action="/add-address" id="add-address" onsubmit="return validateAddAddress()">
                     <div class="form-group">
-                        <input type="text" required="" id="FullName" name="fullname" placeholder="Full Name *" onkeyup="return validateName()">
+                        <input type="text" required="" id="FullName" name="fullname" placeholder="Full Name *"
+                            onkeyup="return validateName()">
                         <span id="FullNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="houseaddress" id="HouseAddress" required="" placeholder="House Address *" onkeyup=" return validateHouseAddress()">
+                        <input type="text" name="houseaddress" id="HouseAddress" required=""
+                            placeholder="House Address *" onkeyup=" return validateHouseAddress()">
                         <span id="AddressError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input required="" type="text" name="city" id="City" placeholder="City" onkeyup=" return validateCity()">
+                        <input required="" type="text" name="city" id="City" placeholder="City"
+                            onkeyup=" return validateCity()">
                         <span id="CityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input required="" type="text" name="state" id="State" placeholder="State " onkeyup="return validateState()">
+                        <input required="" type="text" name="state" id="State" placeholder="State "
+                            onkeyup="return validateState()">
                         <span id="StateError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input required="" type="text" name="zipCode" id="PostalCode" placeholder="Postcode / ZIP *" onkeyup="return validatePostalCode()">
+                        <input required="" type="text" name="zipCode" id="PostalCode" placeholder="Postcode / ZIP *"
+                            onkeyup="return validatePostalCode()">
                         <span id="PostalCodeError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input required="" type="text" name="phone" id="Phone" placeholder="Phone *" onkeyup="return validatePhone()">
+                        <input required="" type="text" name="phone" id="Phone" placeholder="Phone *"
+                            onkeyup="return validatePhone()">
                         <span id="PhoneError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
-                        <input required="" type="text" name="email" id="email" placeholder="Email address *" onkeyup="return validateEmail()">
+                        <input required="" type="text" name="email" id="email" placeholder="Email address *"
+                            onkeyup="return validateEmail()">
                         <span id="EmailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                     </div>
                     <div class="mb-4">
@@ -114,84 +121,84 @@
         }
     }
 
-    function validateHouseAddress(){
+    function validateHouseAddress() {
         const HouseAddress = document.getElementById('HouseAddress').value;
         const regExp = /^(?=.*[A-Za-z])[A-Za-z0-9]+\s(?=.*[A-Za-z])[A-Za-z0-9]+$/;
-        if(!regExp.test(HouseAddress)){
-            document.getElementById('AddressError').innerHTML="Enter a valid House Address";
+        if (!regExp.test(HouseAddress)) {
+            document.getElementById('AddressError').innerHTML = "Enter a valid House Address";
             return false;
-        }else{
+        } else {
             document.getElementById('AddressError').innerHTML = "";
             return true;
         }
 
     }
 
-    function validateCity(){
+    function validateCity() {
         const City = document.getElementById('City').value;
         const regExp = /^[A-Za-z-]+$/
-        if(!regExp.test(City)){
-            document.getElementById('CityError').innerHTML="Enter a valid City Name";
+        if (!regExp.test(City)) {
+            document.getElementById('CityError').innerHTML = "Enter a valid City Name";
             return false;
-        }else{
+        } else {
             document.getElementById('CityError').innerHTML = "";
             return true;
         }
     }
 
-    function validateState(){
+    function validateState() {
         const State = document.getElementById('State').value;
         const regExp = /^(?:[A-Za-z]+\s*)+$/
-        if(!regExp.test(State)){
+        if (!regExp.test(State)) {
             document.getElementById('StateError').innerHTML = "Enter a valid State ";
             return false;
-        }else{
+        } else {
             document.getElementById('StateError').innerHTML = "";
             return true;
         }
     }
 
-    function validatePostalCode(){
+    function validatePostalCode() {
         const PostalCode = document.getElementById('PostalCode').value;
         const regExp = /^\d{6}$/;
-        if(!regExp.test(PostalCode)){
+        if (!regExp.test(PostalCode)) {
             document.getElementById('PostalCodeError').innerHTML = "Enter a valid PostalCode";
             return false;
-        }else{
+        } else {
             document.getElementById('PostalCodeError').innerHTML = "";
             return true;
         }
     }
 
-    function validatePhone(){
+    function validatePhone() {
         const Phone = document.getElementById('Phone').value;
         const regExp = /^[1-9]{1}\d{9}$/
-        if(!regExp.test(Phone)){
+        if (!regExp.test(Phone)) {
             document.getElementById('PhoneError').innerHTML = "Enter a valid Phone";
             return false;
-        }else{
+        } else {
             document.getElementById('PhoneError').innerHTML = "";
             return true;
         }
     }
 
-    function validateEmail(){
+    function validateEmail() {
         const Email = document.getElementById('email').value;
         const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
-        if(!regExp.test(Email)){
+        if (!regExp.test(Email)) {
             document.getElementById('EmailError').innerHTML = "Enter a valid Email"
             return false;
-        }else{
+        } else {
             document.getElementById('EmailError').innerHTML = ""
             return true;
         }
     }
 
-    function validateAddAddress(){
-        if(!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() ||!validatePhone() || !validateEmail()){
-            document.getElementById('AddAddressError').innerHTML="Please Complete all fields!";
+    function validateAddAddress() {
+        if (!validateName() || !validateHouseAddress() || !validateCity() || !validateState() || !validatePostalCode() || !validatePhone() || !validateEmail()) {
+            document.getElementById('AddAddressError').innerHTML = "Please Complete all fields!";
             return false;
-        }else{
+        } else {
             document.getElementById('add-address').submit()
         }
     }

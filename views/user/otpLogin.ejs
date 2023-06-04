@@ -1,5 +1,5 @@
 <section class="content-main mt-80 mb-80 pt-100">
-    <div class="card mx-auto card-login" >
+    <div class="card mx-auto card-login">
         <div class="card-body">
             <h4 class="card-title mb-4"></h4>
             <form action="/otpverify" method="post">
@@ -15,7 +15,8 @@
                 </div> <!-- form-group// -->
                 <div style="display: flex;justify-content: space-between;">
                     <div>Resend otp in <span id="timer">00:10</span> minutes!</div>
-                    <a href="#" style="float: right; display: none;" id="submitLink" onclick="resendOtp('<%=locals.phone %>')">resend
+                    <a href="#" style="float: right; display: none;" id="submitLink"
+                        onclick="resendOtp('<%=locals.phone %>')">resend
                         otp</a>
                 </div>
                 <div class="mb-4">
@@ -50,7 +51,7 @@
                     var threeMinutes = 10,
                         display = document.getElementById('timer');
                     startTimer(threeMinutes, display);
-                    document.getElementById('submitLink').style.display='none'
+                    document.getElementById('submitLink').style.display = 'none'
                 }
             })
         })
@@ -72,7 +73,7 @@
             if (--timer < 0) {
                 timer = duration;
                 stopTimer()
-                document.getElementById('submitLink').style.display='block'
+                document.getElementById('submitLink').style.display = 'block'
             }
         }, 1000);
     }

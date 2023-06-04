@@ -1,86 +1,88 @@
 <div class="mobile-header-active mobile-header-wrapper-style">
   <div class="mobile-header-wrapper-inner">
-      <div class="mobile-header-top">
-          <div class="mobile-header-logo">
-              <a href="/"><img src="assets/imgs/theme/EzyMart.jpg" alt="logo"></a>
-          </div>
-          <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
-              <button class="close-style search-close">
-                  <i class="icon-top"></i>
-                  <i class="icon-bottom"></i>
-              </button>
-          </div>
+    <div class="mobile-header-top">
+      <div class="mobile-header-logo">
+        <a href="/"><img src="assets/imgs/theme/EzyMart.jpg" alt="logo"></a>
       </div>
-      <div class="mobile-header-content-area">
-          
-          <div class="mobile-menu-wrap mobile-header-border">
-              
-              <!-- mobile menu start -->
-              <nav>
-                  <ul class="mobile-menu">
-                      <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
-                          
-                      </li>
-                      <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
-                          
-                      </li>
-                      
-                  </ul>
-              </nav>
-              <!-- mobile menu end -->
-          </div>
-          <div class="mobile-header-info-wrap mobile-header-border">
-              <div class="single-mobile-header-info mt-30">
-                  <a  href="page-contact.html"> Our location </a>
-              </div>
-              <div class="single-mobile-header-info">
-                  <% if (locals.user){%>
-                      <a href="/logout">Hi <%= user.name %> | logout</a>
-                  <%}else{%>
-                     </i><a href="/signin">Log In / Sign Up</a>
-                  <%} %>
-              </div>
-              <div class="single-mobile-header-info">
-                  <a href="#">(+01) - 2345 - 6789 </a>
-              </div>
-          </div>
-          <div class="mobile-social-icon">
-              <h5 class="mb-15 text-grey-4">Follow Us</h5>
-              <a href="/"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-              <a href="/"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-              <a href="/"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-              <a href="/"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-              <a href="/"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
-          </div>
+      <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+        <button class="close-style search-close">
+          <i class="icon-top"></i>
+          <i class="icon-bottom"></i>
+        </button>
       </div>
+    </div>
+    <div class="mobile-header-content-area">
+
+      <div class="mobile-menu-wrap mobile-header-border">
+
+        <!-- mobile menu start -->
+        <nav>
+          <ul class="mobile-menu">
+            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
+
+            </li>
+            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
+
+            </li>
+
+          </ul>
+        </nav>
+        <!-- mobile menu end -->
+      </div>
+      <div class="mobile-header-info-wrap mobile-header-border">
+        <div class="single-mobile-header-info mt-30">
+          <a href="page-contact.html"> Our location </a>
+        </div>
+        <div class="single-mobile-header-info">
+          <% if (locals.user){%>
+            <a href="/logout">Hi <%= user.name %> | logout</a>
+            <%}else{%>
+              </i><a href="/signin">Log In / Sign Up</a>
+              <%} %>
+        </div>
+        <div class="single-mobile-header-info">
+          <a href="#">(+01) - 2345 - 6789 </a>
+        </div>
+      </div>
+      <div class="mobile-social-icon">
+        <h5 class="mb-15 text-grey-4">Follow Us</h5>
+        <a href="/"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+        <a href="/"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+        <a href="/"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+        <a href="/"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+        <a href="/"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+      </div>
+    </div>
   </div>
 </div>
 <main class="main">
-    <div class="page-header breadcrumb-wrap">
-      <div class="container">
-        <div class="breadcrumb">
-          <a href="/" rel="nofollow">Home</a>
-          <span></span> Shop
-          <span></span> Order Placed
-        </div>
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/" rel="nofollow">Home</a>
+        <span></span> Shop
+        <span></span> Order Placed
       </div>
     </div>
-    <section class="mt-75 mb-75">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto text-center">
-            <!-- <h2 class="mb-40">Your order has been recieved!</h2> -->
-            <h1 class=" " style="font-size: 5em;">🎉</h1>
-            <h3 class="mb-5 mt-2">Thank you for your order!</h3>
-            <p>You can view more details about the order in the my account page</p>
-            <div class="btn-wrap mt-40">
-              
-              <a href="/shop" class="btn"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
-  
-              <a  class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up ms-2" href="/allorders"><i class="fi-rs-user mr-10"></i>See all orders</a>
-            </div>
+  </div>
+  <section class="mt-75 mb-75">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+          <!-- <h2 class="mb-40">Your order has been recieved!</h2> -->
+          <h1 class=" " style="font-size: 5em;">🎉</h1>
+          <h3 class="mb-5 mt-2">Thank you for your order!</h3>
+          <p>You can view more details about the order in the my account page</p>
+          <div class="btn-wrap mt-40">
+
+            <a href="/shop" class="btn"><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+
+            <a class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up ms-2"
+              href="/allorders"><i class="fi-rs-user mr-10"></i>See all orders</a>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+    
+</main>

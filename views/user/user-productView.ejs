@@ -12,33 +12,33 @@
             </div>
         </div>
         <div class="mobile-header-content-area">
-            
+
             <div class="mobile-menu-wrap mobile-header-border">
-                
+
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
-                            
+
                         </li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/shop">shop</a>
-                            
+
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- mobile menu end -->
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a  href="page-contact.html"> Our location </a>
+                    <a href="page-contact.html"> Our location </a>
                 </div>
                 <div class="single-mobile-header-info">
                     <% if (locals.user){%>
                         <a href="/logout">Hi <%= user.name %> | logout</a>
-                    <%}else{%>
-                       </i><a href="/signin">Log In / Sign Up</a>
-                    <%} %>
+                        <%}else{%>
+                            </i><a href="/signin">Log In / Sign Up</a>
+                            <%} %>
                 </div>
                 <div class="single-mobile-header-info">
                     <a href="#">(+01) - 2345 - 6789 </a>
@@ -67,16 +67,20 @@
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
                                     <figure class="border-radius-10">
-                                        <img src="/images/products_image/<%=product.ProductImages[0]%>" alt="product image">
+                                        <img src="/images/products_image/<%=product.ProductImages[0]%>"
+                                            alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="/images/products_image/<%=product.ProductImages[1]%>" alt="product image">
+                                        <img src="/images/products_image/<%=product.ProductImages[1]%>"
+                                            alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="/images/products_image/<%=product.ProductImages[2]%>" alt="product image">
+                                        <img src="/images/products_image/<%=product.ProductImages[2]%>"
+                                            alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="/images/products_image/<%=product.ProductImages[3]%>" alt="product image">
+                                        <img src="/images/products_image/<%=product.ProductImages[3]%>"
+                                            alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
                                         <img src="assets/imgs/shop/product-16-5.jpg" alt="product image">
@@ -90,35 +94,43 @@
                                 </div>
                                 <!-- THUMBNAILS -->
                                 <div class="slider-nav-thumbnails pl-15 pr-15">
-                                    <div><img src="/images/products_image/<%=product.ProductImages[0]%>" alt="product image"></div>
-                                    <div><img src="/images/products_image/<%=product.ProductImages[1]%>" alt="product image"></div>
-                                    <div><img src="/images/products_image/<%=product.ProductImages[2]%>" alt="product image"></div>
-                                    <div><img src="/images/products_image/<%=product.ProductImages[3]%>" alt="product image"></div>
-                                   
-                                    
+                                    <div><img src="/images/products_image/<%=product.ProductImages[0]%>"
+                                            alt="product image"></div>
+                                    <div><img src="/images/products_image/<%=product.ProductImages[1]%>"
+                                            alt="product image"></div>
+                                    <div><img src="/images/products_image/<%=product.ProductImages[2]%>"
+                                            alt="product image"></div>
+                                    <div><img src="/images/products_image/<%=product.ProductImages[3]%>"
+                                            alt="product image"></div>
+
+
                                 </div>
                             </div>
                             <!-- End Gallery -->
-                            
+
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="detail-info">
-                                <h2 class="title-detail"><%=product.ProductTitle %></h2>
+                                <h2 class="title-detail">
+                                    <%=product.ProductTitle %>
+                                </h2>
                                 <div class="product-detail-rating">
                                     <div class="pro-details-brand">
                                         <span> CATEGORY: <%=product.ProductCategory %></span>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
                                         <ins><span class="text-brand">Rs <%=product.ProductPricing %></span></ins>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                                 <div class="short-desc mb-30">
-                                    <p><%=product.ProductDescription %></p>
+                                    <p>
+                                        <%=product.ProductDescription %>
+                                    </p>
                                 </div>
                                 <div class="product_sort_info font-xs mb-30">
                                     <ul>
@@ -128,48 +140,49 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                 <div class="detail-extralink">
-                                    
+
                                     <div class="product-extra-link2">
                                         <% if(product.ProductQuantity <=0){%>
                                             <button class="button button-add-to-cart">Out of Stock</button>
-                                       <%}else{%>
-                                            <button type="submit" onclick="addToCart('<%=product._id%>')" class="button button-add-to-cart">Add to
-                                            cart</button>
-                                        <%} %>
-                                        
+                                            <%}else{%>
+                                                <button type="submit" onclick="addToCart('<%=product._id%>')"
+                                                    class="button button-add-to-cart">Add to
+                                                    cart</button>
+                                                <%} %>
+
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <!-- Detail Info -->
                         </div>
                     </div>
-        </div>
-    </div>
+                </div>
+            </div>
 </section>
 <script>
-    function addToCart(proId){
-            $.ajax({
-                url:'/add-to-cart/'+proId,
-                method:'get',
-                success:(response)=>{
-                    console.log(response,'ppppppppp')
-                    if(response.status){
-                        let count = $('#cart-count').html()
-                        count = parseInt(count) + 1;
-                        $('#cart-count').html(count)
-                        $('#cart-count-mobile').html(count)
-                        toastr.success('Item added to Cart','',{
-                            positionClass:'toast-top-right',
-                            width:'100px'
-                        })
-                    }else{
-                        toastr.warning('You have to login first')
-                    }
+    function addToCart(proId) {
+        $.ajax({
+            url: '/add-to-cart/' + proId,
+            method: 'get',
+            success: (response) => {
+                console.log(response, 'ppppppppp')
+                if (response.status) {
+                    let count = $('#cart-count').html()
+                    count = parseInt(count) + 1;
+                    $('#cart-count').html(count)
+                    $('#cart-count-mobile').html(count)
+                    toastr.success('Item added to Cart', '', {
+                        positionClass: 'toast-top-right',
+                        width: '100px'
+                    })
+                } else {
+                    toastr.warning('You have to login first')
                 }
-            })
-        }
+            }
+        })
+    }
 </script>

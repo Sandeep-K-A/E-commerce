@@ -3,6 +3,7 @@
 
 <i class="bi bi-person-circle"></i>
 <!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-account-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:33 GMT -->
+
 <head>
     <meta charset="utf-8">
     <title>Evara Dashboard</title>
@@ -18,57 +19,63 @@
     <!-- Template CSS -->
     <link href="/assets1/css/main.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-<section class="content-main mt-80 mb-80">
-    <div class="card mx-auto card-login">
-        <div class="card-body">
-            <h4 class="card-title mb-4">Admin Sign in</h4>
-            <form action="/admin" method="post">
-                <div class="mb-3">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="text" onkeyup="return validateEmail()">
-                    <span id="emailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div> 
-                <div class="mb-3">
-                    <input class="form-control" id="password" name="password" placeholder="Password" type="password" onkeyup="return validatePassword()">
-                    <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div> 
-                <div class="mb-4">
-                    <button type="submit" class="btn btn-primary w-100"> Login </button>
-                    <a href="admin/signup" class="">Create a New Account</a>
-                </div>
-                <% if(locals.err){%>
-                    <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;"><%=err %></span>
-                <%} %> 
-            </form>
-            
-    </div>
-</section>
-<script src="/assets1/js/vendors/jquery-3.6.0.min.js"></script>
-<script src="/assets1/js/vendors/bootstrap.bundle.min.js"></script>
-<script src="/assets1/js/vendors/jquery.fullscreen.min.js"></script>
-<!-- Main Script -->
-<script src="/assets1/js/main.js" type="text/javascript"></script>
+    <section class="content-main mt-80 mb-80">
+        <div class="card mx-auto card-login">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Admin Sign in</h4>
+                <form action="/admin" method="post">
+                    <div class="mb-3">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="text"
+                            onkeyup="return validateEmail()">
+                        <span id="emailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" id="password" name="password" placeholder="Password" type="password"
+                            onkeyup="return validatePassword()">
+                        <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                    </div>
+                    <div class="mb-4">
+                        <button type="submit" class="btn btn-primary w-100"> Login </button>
+                        <a href="admin/signup" class="">Create a New Account</a>
+                    </div>
+                    <% if(locals.err){%>
+                        <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;">
+                            <%=err %>
+                        </span>
+                        <%} %>
+                </form>
+
+            </div>
+    </section>
+    <script src="/assets1/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets1/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets1/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/assets1/js/main.js" type="text/javascript"></script>
 </body>
+
 </html>
 <script>
-    function validateEmail(){
+    function validateEmail() {
         const email = document.getElementById('email').value;
         const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
-        if(!regExp.test(email)){
+        if (!regExp.test(email)) {
             document.getElementById('emailError').innerHTML = "Enter a valid Email."
             return false;
-        }else{
+        } else {
             document.getElementById('emailError').innerHTML = "";
             return true;
         }
     }
-    function validatePassword(){
+    function validatePassword() {
         const password = document.getElementById('password').value
         const regExp = /^.{8,}$/;
-        if(!regExp.test(password)){
+        if (!regExp.test(password)) {
             document.getElementById('passwordError').innerHTML = "Enter a valid Password!"
             return false;
-        }else{
+        } else {
             document.getElementById('passwordError').innerHTML = "";
             return true;
         }

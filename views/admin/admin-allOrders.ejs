@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="card mb-4">
-        
+
         <% if(allOrders){%>
             <div class="card-body">
                 <div class="table-responsive">
@@ -55,7 +55,7 @@
                                                         class="badge rounded-pill bg-success">
                                                         <%=orders.Status %>
                                                     </span>
-                                                    <%}else if(orders.Status === 'Cancelled'){%>
+                                                    <%}else if(orders.Status==='Cancelled' ){%>
                                                         <span id="statusID/<%=orders._id %>"
                                                             class="badge rounded-pill bg-danger">
                                                             <%=orders.Status %>
@@ -76,15 +76,16 @@
                                     </td>
                                     <td>
                                         <!-- Default dropstart button -->
-                                        <% if(orders.Status=== 'Delivered'){%>
+                                        <% if(orders.Status==='Delivered' ){%>
                                             order Delivered
-                                            <%}else if(orders.Status === 'Returned'){%>
+                                            <%}else if(orders.Status==='Returned' ){%>
                                                 order Returned
-                                                <%}else if(orders.Status === 'Cancelled'){%>
+                                                <%}else if(orders.Status==='Cancelled' ){%>
                                                     order Cancelled
                                                     <%}else{%>
                                                         <div class="btn-group ">
-                                                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                            <button type="button"
+                                                                class="btn btn-secondary dropdown-toggle"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                                 Order Status
                                                             </button>

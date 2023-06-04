@@ -3,64 +3,71 @@
         <div class="card-body">
             <h4 class="card-title mb-4">Sign in</h4>
             <% if(locals.blockMessage){%>
-                <span id="BlockedError" style="color: red;font-size: 12px;margin-top: 5px;"><%=blockMessage %></span>
-            <%} %>
-            <form action="/signin" method="post" id="signup" onsubmit="return signin()">
-                <div class="mb-3">
-                    <input class="form-control" id="email" placeholder="Email" type="text" name="email" required="" onkeyup="return validateEmail()">
-                    <span id="emailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div> <!-- form-group// -->
-                <div class="mb-3">
-                    <input class="form-control" id="password" placeholder="Password" type="Password" name="password" required="" onkeyup="return validatePassword()">
-                    <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div> <!-- form-group// -->
-                
-                <div class="mb-4">
-                    <button type="submit" class="btn btn-primary w-100"> Login </button>
-                    <span id="signinError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div>
-            </form>
-            <div class="mb-4">
-                <a href="/otpsignin"><button type="submit" class="btn btn-primary w-100"> Login with Otp </button></a>
-            </div>
-            <p class="text-center mb-4">Don't have account? <a href="/signup">Sign up</a></p>
-            <p class="text-center mb-4"><a href="/forgot-password">Forgot Password?</a></p>
-            <% if(locals.err){%>
-                <span style="color: red;font-size: 18px; margin-top: 2px;" class="justify-content-center" ><%= err %></span>
-            <%} %>
+                <span id="BlockedError" style="color: red;font-size: 12px;margin-top: 5px;">
+                    <%=blockMessage %>
+                </span>
+                <%} %>
+                    <form action="/signin" method="post" id="signup" onsubmit="return signin()">
+                        <div class="mb-3">
+                            <input class="form-control" id="email" placeholder="Email" type="text" name="email"
+                                required="" onkeyup="return validateEmail()">
+                            <span id="emailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
+                            <input class="form-control" id="password" placeholder="Password" type="Password"
+                                name="password" required="" onkeyup="return validatePassword()">
+                            <span id="passwordError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                        </div> <!-- form-group// -->
+
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-primary w-100"> Login </button>
+                            <span id="signinError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                        </div>
+                    </form>
+                    <div class="mb-4">
+                        <a href="/otpsignin"><button type="submit" class="btn btn-primary w-100"> Login with Otp
+                            </button></a>
+                    </div>
+                    <p class="text-center mb-4">Don't have account? <a href="/signup">Sign up</a></p>
+                    <p class="text-center mb-4"><a href="/forgot-password">Forgot Password?</a></p>
+                    <% if(locals.err){%>
+                        <span style="color: red;font-size: 18px; margin-top: 2px;" class="justify-content-center">
+                            <%= err %>
+                        </span>
+                        <%} %>
         </div>
     </div>
 </section>
 <script>
-    function validateEmail(){
+    function validateEmail() {
         const email = document.getElementById('email').value;
         const regExp = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
-        if(!regExp.test(email)){
+        if (!regExp.test(email)) {
             document.getElementById('emailError').innerHTML = "Enter a valid Email";
             return false;
-        }else{
+        } else {
             document.getElementById('emailError').innerHTML = "";
             return true;
         }
     }
-    function validatePassword(){
+    function validatePassword() {
         const password = document.getElementById('password').value;
-        const regExp =  /^.{8,}$/;
-        if(!regExp.test(password)){
+        const regExp = /^.{8,}$/;
+        if (!regExp.test(password)) {
             document.getElementById('passwordError').innerHTML = "Enter a valid Password";
             return false;
-        }else{
+        } else {
             document.getElementById('passwordError').innerHTML = "";
             return true;
         }
     }
-    function signin(){
-        if(!validateEmail()||! validatePassword()){
+    function signin() {
+        if (!validateEmail() || !validatePassword()) {
             document.getElementById('signinError').innerHTML = "Please complete all fields!";
             return false;
-        }else{
+        } else {
             document.getElementById('signup').submit()
-            
+
         }
     }
 </script>

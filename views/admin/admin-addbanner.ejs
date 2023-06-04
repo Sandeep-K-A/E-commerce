@@ -19,11 +19,13 @@
                         </div>
                         <div class="mb-4">
                             <label for="product_name" class="form-label">Banner Description 1</label>
-                            <textarea placeholder="Type here"name="BannerDescription1" class="form-control" rows="4"></textarea>
+                            <textarea placeholder="Type here" name="BannerDescription1" class="form-control"
+                                rows="4"></textarea>
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Banner Description 2</label>
-                            <textarea placeholder="Type here"name="BannerDescription2" class="form-control" rows="4"></textarea>
+                            <textarea placeholder="Type here" name="BannerDescription2" class="form-control"
+                                rows="4"></textarea>
                         </div>
                         <div class="mb-4">
                             <label for="product_name" class="form-label">BannerLink</label>
@@ -38,11 +40,11 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="input-upload">
-                                            <img src="/assets1/imgs/theme/upload.svg" id="imagePreview1"  alt="">
+                                            <img src="/assets1/imgs/theme/upload.svg" id="imagePreview1" alt="">
                                             <input class="form-control" type="file" name="BannerImage" id="imageInput">
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div>
@@ -56,28 +58,28 @@
         </div>
 </section>
 <script>
-    $('#add-banner').submit((e)=>{
+    $('#add-banner').submit((e) => {
         const formData = new FormData($('#add-banner')[0]);
         e.preventDefault()
         $.ajax({
-            url:'/admin/add-banners',
-            method:'post',
-            data:formData,
+            url: '/admin/add-banners',
+            method: 'post',
+            data: formData,
             processData: false,
-        contentType: false,
-            success:(response)=>{
-                if(response.bannerExist){
+            contentType: false,
+            success: (response) => {
+                if (response.bannerExist) {
                     const message = 'Banner already exist with this Banner Header..Try changing the Banner Header'
                     const url = `/admin/banners?message=${encodeURIComponent(message)}`
-                    location.href=url;
-                }else if(response.Status){
+                    location.href = url;
+                } else if (response.Status) {
                     const message = 'New Banner added successfully'
                     const url = `/admin/banners?message=${encodeURIComponent(message)}`
-                    location.href=url;
-                }else{
+                    location.href = url;
+                } else {
                     const message = 'operation failed...'
                     const url = `/admin/banners?message=${encodeURIComponent(message)}`
-                    location.href=url;
+                    location.href = url;
                 }
             }
         })

@@ -14,32 +14,39 @@
                     <form method="post" action="/admin/addproducts" enctype="multipart/form-data">
                         <div class="mb-4">
                             <label for="product_name" class="form-label">Product Title</label>
-                            <input type="text" name="productTitle" placeholder="Type here" class="form-control" id="product_name" onkeyup="return validateProductName()">
+                            <input type="text" name="productTitle" placeholder="Type here" class="form-control"
+                                id="product_name" onkeyup="return validateProductName()">
                             <span id="ProductNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Product Description</label>
-                            <textarea placeholder="Type here"name="productDescription" class="form-control" rows="4" id="product_description" onkeyup="return validateProductDescription()"></textarea>
-                            <span id="ProductDescriptionError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                            <textarea placeholder="Type here" name="productDescription" class="form-control" rows="4"
+                                id="product_description" onkeyup="return validateProductDescription()"></textarea>
+                            <span id="ProductDescriptionError"
+                                style="color: red;font-size: 12px;margin-top: 5px;"></span>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="mb-4">
                                     <label class="form-label">Product Price</label>
                                     <div class="row gx-2">
-                                        <input placeholder="Rs" type="text" name="productPrice" class="form-control" id="product_price" onkeyup="return validateProductPrice()">
-                                        <span id="ProductPriceError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                        <input placeholder="Rs" type="text" name="productPrice" class="form-control"
+                                            id="product_price" onkeyup="return validateProductPrice()">
+                                        <span id="ProductPriceError"
+                                            style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="mb-4">
                                     <label class="form-label">Product Quantity</label>
-                                    <input placeholder="$" type="text" name="productQuantity" class="form-control" id="product_quantity" onkeyup="return validateProductQuantity()">
-                                    <span id="ProductQuantityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                    <input placeholder="$" type="text" name="productQuantity" class="form-control"
+                                        id="product_quantity" onkeyup="return validateProductQuantity()">
+                                    <span id="ProductQuantityError"
+                                        style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <div class="col-lg-12">
                             <div class="card mb-4">
@@ -48,16 +55,21 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="input-upload">
-                                        <label for="imagePreview1">Image-1</label><img src="/assets1/imgs/theme/upload.svg" id="imagePreview1"  alt="">
-                                        <label for="imagePreview1">Image-2</label><img src="/assets1/imgs/theme/upload.svg" id="imagePreview2"  alt="">
-                                        <label for="imagePreview1">Image-3</label><img src="/assets1/imgs/theme/upload.svg" id="imagePreview3"  alt="">
-                                        <label for="imagePreview1">Image-4</label><img src="/assets1/imgs/theme/upload.svg" id="imagePreview4"  alt="">
-                                        <input class="form-control" type="file" name="productImage" id="imageInput" multiple>
+                                        <label for="imagePreview1">Image-1</label><img
+                                            src="/assets1/imgs/theme/upload.svg" id="imagePreview1" alt="">
+                                        <label for="imagePreview1">Image-2</label><img
+                                            src="/assets1/imgs/theme/upload.svg" id="imagePreview2" alt="">
+                                        <label for="imagePreview1">Image-3</label><img
+                                            src="/assets1/imgs/theme/upload.svg" id="imagePreview3" alt="">
+                                        <label for="imagePreview1">Image-4</label><img
+                                            src="/assets1/imgs/theme/upload.svg" id="imagePreview4" alt="">
+                                        <input class="form-control" type="file" name="productImage" id="imageInput"
+                                            multiple>
                                     </div>
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <h4>Product Category & Cover Image</h4>
@@ -69,48 +81,55 @@
                                             <select class="form-select" name="productCategory">
                                                 <% categories.forEach((category)=>{%>
                                                     <% if (category.status){%>
-                                                        <option value="<%=category.name %>"><%=category.name %></option>
-                                                    <%} %>
-                                                <%}) %>
+                                                        <option value="<%=category.name %>">
+                                                            <%=category.name %>
+                                                        </option>
+                                                        <%} %>
+                                                            <%}) %>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-lg-4">
                                             <label class="form-label">Product Cover Image</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox1" value="0" onchange="limitCheckboxSelections()">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions"
+                                                    id="checkbox1" value="0" onchange="limitCheckboxSelections()">
                                                 <label class="form-check-label" for="checkbox1">
-                                                  Image 1
+                                                    Image 1
                                                 </label>
-                                              </div>
-                                              
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox2" value="1" onchange="limitCheckboxSelections()">
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions"
+                                                    id="checkbox2" value="1" onchange="limitCheckboxSelections()">
                                                 <label class="form-check-label" for="checkbox2">
-                                                  Image 2
+                                                    Image 2
                                                 </label>
-                                              </div>
-                                              
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox3" value="2" onchange="limitCheckboxSelections()">
-                                                <label class="form-check-label" for="checkbox3">
-                                                  Image 3
-                                                </label>
-                                              </div>
+                                            </div>
 
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="selectedOptions" id="checkbox3" value="3" onchange="limitCheckboxSelections()">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions"
+                                                    id="checkbox3" value="2" onchange="limitCheckboxSelections()">
                                                 <label class="form-check-label" for="checkbox3">
-                                                  Image 4
+                                                    Image 3
                                                 </label>
-                                              </div>
+                                            </div>
 
-                                              <div id="checkboxError" style="color: red; display: none;">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="selectedOptions"
+                                                    id="checkbox3" value="3" onchange="limitCheckboxSelections()">
+                                                <label class="form-check-label" for="checkbox3">
+                                                    Image 4
+                                                </label>
+                                            </div>
+
+                                            <div id="checkboxError" style="color: red; display: none;">
                                                 Please select at least 2 options.
-                                              </div>
+                                            </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-md rounded font-sm hover-up " type="submit" style="float: right;">Add</button>
+                                            <button class="btn btn-md rounded font-sm hover-up " type="submit"
+                                                style="float: right;">Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -122,89 +141,89 @@
         </div>
 </section>
 <script>
-      document.getElementById('imageInput').addEventListener('change', function(event) {
-    const imagePreview1 = document.getElementById('imagePreview1');
-    const imagePreview2 = document.getElementById('imagePreview2');
-    const imagePreview3 = document.getElementById('imagePreview3');
-    const imagePreview4 = document.getElementById('imagePreview4');
-    imagePreview1.style.display = 'block';
-    imagePreview2.style.display = 'block';
-    imagePreview3.style.display = 'block';
-    imagePreview4.style.display = 'block';
-    imagePreview1.src = URL.createObjectURL(event.target.files[0]);
-    imagePreview2.src = URL.createObjectURL(event.target.files[1]);
-    imagePreview3.src = URL.createObjectURL(event.target.files[2]);
-    imagePreview4.src = URL.createObjectURL(event.target.files[3]);
-  });
-
-
-  function limitCheckboxSelections() {
-    const checkboxes = document.querySelectorAll('.form-check-input');
-    let checkedCount = 0;
-
-    checkboxes.forEach(checkbox => {
-      if (checkbox.checked) {
-        checkedCount++;
-      }
-
-      if (checkedCount > 2) {
-        checkbox.checked = false;
-      }
+    document.getElementById('imageInput').addEventListener('change', function (event) {
+        const imagePreview1 = document.getElementById('imagePreview1');
+        const imagePreview2 = document.getElementById('imagePreview2');
+        const imagePreview3 = document.getElementById('imagePreview3');
+        const imagePreview4 = document.getElementById('imagePreview4');
+        imagePreview1.style.display = 'block';
+        imagePreview2.style.display = 'block';
+        imagePreview3.style.display = 'block';
+        imagePreview4.style.display = 'block';
+        imagePreview1.src = URL.createObjectURL(event.target.files[0]);
+        imagePreview2.src = URL.createObjectURL(event.target.files[1]);
+        imagePreview3.src = URL.createObjectURL(event.target.files[2]);
+        imagePreview4.src = URL.createObjectURL(event.target.files[3]);
     });
 
-    const checkboxError = document.getElementById('checkboxError');
-    if (checkedCount < 2) {
-      checkboxError.style.display = 'block';
-    } else {
-      checkboxError.style.display = 'none';
-    }
-  }
 
-  function validateProductName(){
-    const productName = document.getElementById('product_name').value;
-    const regExp = /^[A-Z]+(?:[ -][A-Z&]+)?$/
-    if(!regExp.test(productName)){
-        document.getElementById('ProductNameError').innerHTML="Enter a valid ProductName in Upper Case and can only use (&)"
-        return false;
-    }else{
-        document.getElementById('ProductNameError').innerHTML = "";
-        return true;
-    }
-  }
+    function limitCheckboxSelections() {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        let checkedCount = 0;
 
-  function validateProductDescription(){
-    const productDescription = document.getElementById('product_description').value;
-    const regExp = /^(?:\b[^\d\s]+\b\s?){1,6}$/
-    if(!regExp.test(productDescription)){
-        document.getElementById('ProductDescriptionError').innerHTML = "Enter a valid Product Description at most of 6 words"
-        return false;
-    }else{
-        document.getElementById('ProductDescriptionError').innerHTML = "";
-        return true;
-    }
-  }
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checkedCount++;
+            }
 
-  function validateProductPrice(){
-    const ProductPrice = document.getElementById('product_price').value;
-    const regExp = /^(?!0+$)\d+$/
-    if(!regExp.test(ProductPrice)){
-        document.getElementById('ProductPriceError').innerHTML = "The Price of the Product must not be just 0 or have any Characters"
-        return false;
-    }else{
-        document.getElementById('ProductPriceError').innerHTML = "";
-        return true;
-    }
-  }
+            if (checkedCount > 2) {
+                checkbox.checked = false;
+            }
+        });
 
-  function validateProductQuantity(){
-    const productQuantity = document.getElementById('product_quantity').value;
-    const regExp = /^(?!0$)\d{1,3}$/
-    if(!regExp.test(productQuantity)){
-        document.getElementById('ProductQuantityError').innerHTML = "Please Enter a valid Product Quantity"
-        return false;
-    }else{
-        document.getElementById('ProductQuantityError').innerHTML = "";
-        return true;
+        const checkboxError = document.getElementById('checkboxError');
+        if (checkedCount < 2) {
+            checkboxError.style.display = 'block';
+        } else {
+            checkboxError.style.display = 'none';
+        }
     }
-  }
+
+    function validateProductName() {
+        const productName = document.getElementById('product_name').value;
+        const regExp = /^[A-Z]+(?:[ -][A-Z&]+)?$/
+        if (!regExp.test(productName)) {
+            document.getElementById('ProductNameError').innerHTML = "Enter a valid ProductName in Upper Case and can only use (&)"
+            return false;
+        } else {
+            document.getElementById('ProductNameError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateProductDescription() {
+        const productDescription = document.getElementById('product_description').value;
+        const regExp = /^(?:\b[^\d\s]+\b\s?){1,6}$/
+        if (!regExp.test(productDescription)) {
+            document.getElementById('ProductDescriptionError').innerHTML = "Enter a valid Product Description at most of 6 words"
+            return false;
+        } else {
+            document.getElementById('ProductDescriptionError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateProductPrice() {
+        const ProductPrice = document.getElementById('product_price').value;
+        const regExp = /^(?!0+$)\d+$/
+        if (!regExp.test(ProductPrice)) {
+            document.getElementById('ProductPriceError').innerHTML = "The Price of the Product must not be just 0 or have any Characters"
+            return false;
+        } else {
+            document.getElementById('ProductPriceError').innerHTML = "";
+            return true;
+        }
+    }
+
+    function validateProductQuantity() {
+        const productQuantity = document.getElementById('product_quantity').value;
+        const regExp = /^(?!0$)\d{1,3}$/
+        if (!regExp.test(productQuantity)) {
+            document.getElementById('ProductQuantityError').innerHTML = "Please Enter a valid Product Quantity"
+            return false;
+        } else {
+            document.getElementById('ProductQuantityError').innerHTML = "";
+            return true;
+        }
+    }
 </script>

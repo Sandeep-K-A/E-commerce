@@ -4,15 +4,17 @@
             <h4 class="card-title mb-4">Edit Category</h4>
             <form action="/admin/editcategory" method="post">
                 <div class="mb-3">
-                    <input class="form-control" id="categoryname" name="categoryname" placeholder="" type="text" value="<%=category.name %>" >
+                    <input class="form-control" id="categoryname" name="categoryname" placeholder="" type="text"
+                        value="<%=category.name %>">
                     <span id="emailError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
-                </div> 
-                <input class="form-control" id="hiddenname" name="hiddenname" placeholder="" type="text" value="<%=category.name %>" hidden >
-                
+                </div>
+                <input class="form-control" id="hiddenname" name="hiddenname" placeholder="" type="text"
+                    value="<%=category.name %>" hidden>
+
                 <div class="mb-4">
                     <button type="submit" class="btn btn-primary w-100"> Edit </button>
-                </div> 
+                </div>
             </form>
         </div>
-        </div>
-    </section>
+    </div>
+</section>
