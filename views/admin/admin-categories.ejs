@@ -81,7 +81,7 @@
                 success:(response)=>{
                     console.log(response);
                     if(!response.status){
-                        toastr.error('This category cannot be disabled due products listings under this category','',{timeOut:3000})
+                        toastr.error('This category cannot be disabled due products listings under this category','',{timeOut:1000})
                     }else{
                         if(statusButton.innerHTML === 'Disable'){
                             toastr.warning('This category is Disabled','',{timeOut:1000})

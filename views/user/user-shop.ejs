@@ -215,6 +215,8 @@
                     $('#cart-count').html(count)
                     $('#cart-count-mobile').html(count)
                     toastr.success('Item added to Cart')
+                }else{
+                    toastr.warning('You have to login first')
                 }
             }
         })
