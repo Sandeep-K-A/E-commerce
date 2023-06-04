@@ -292,7 +292,18 @@
                       <td class="price" data-title="Price"><h5><%=item.subTotal %></h5></span></td>
                       <td class="text-center" >
                         <span class="color3 font-weight-bold">
-                          <span class="badge rounded-pill alert-warning"><%=orderInfo.Status %></span>
+                          <% if(orderInfo.Status =='Placed' ){%>
+                            <span class="badge rounded-pill alert-warning"><%=orderInfo.Status %></span>
+                          <%}else if(orderInfo.Status == 'Intransit'){%>
+                            <span class="badge rounded-pill alert-info"><%=orderInfo.Status %></span>
+                          <%}else if(orderInfo.Status == 'Delivered'){%>
+                            <span class="badge rounded-pill alert-success"><%=orderInfo.Status %></span>
+                          <%}else if(orderInfo.Status == 'Cancelled'){%>
+                            <span class="badge rounded-pill alert-danger"><%=orderInfo.Status %></span>
+                          <%}else{%>
+                            <span class="badge rounded-pill alert-dark"><%=orderInfo.Status %></span>
+                          <%} %>
+                          
                         </span>
                       </td>
                       <!-- <td class="text-right" data-title="">

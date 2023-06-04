@@ -10,9 +10,12 @@ const ordersHelpers = require('../helpers/orders-helpers');
 
 module.exports = {
 
-    getHome: (req, res) => {
+    getHome: async(req, res) => {
         const user = req.session.user
         let cartCount = null;
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         userHelper.fetchProducts().then((products) => {
             if (user) {
                 const id = user._id;
@@ -20,7 +23,7 @@ module.exports = {
                     cartCount = count
                     console.log(cartCount)
                     userHelper.fetchDisplayBanner().then((banners) => {
-                        res.render('user/index', { user, products, cartCount, banners })
+                        res.render('user/index', { user, products, cartCount, banners,matchingCategory })
                     })
                 }).catch((error) => {
                     let message = "Error Fetching Cart Count"
@@ -28,7 +31,7 @@ module.exports = {
                 })
             } else {
                 userHelper.fetchDisplayBanner().then((banners) => {
-                    res.render('user/index', { user, products, banners })
+                    res.render('user/index', { user, products, banners,matchingCategory })
                 })
             }
         }).catch((error) => {
@@ -153,19 +156,22 @@ module.exports = {
             res.render('user/error', { message, log: true })
         })
     },
-    productView: ((req, res) => {
+    productView: async(req, res) => {
         const id = req.params.id
         const user = req.session.user
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         console.log(id)
         userHelper.fetchSingleProduct(id).then((product) => {
             if (user) {
                 const userId = req.session.user._id;
                 cartHelpers.getcartCount(userId).then((count) => {
                     let cartCount = count
-                    res.render('user/user-productView', { product, cartCount, user })
+                    res.render('user/user-productView', { product, cartCount, user,matchingCategory })
                 })
             } else {
-                res.render('user/user-productView', { product })
+                res.render('user/user-productView', { product,matchingCategory })
             }
             // console.log(product.ProductImages[0], 'llllllllllllllllll')
 
@@ -173,16 +179,19 @@ module.exports = {
             let message = "Error Fetching Product Details.."
             res.render('user/error', { message, log: true })
         })
-    }),
-    getAccount: (req, res) => {
+    },
+    getAccount: async(req, res) => {
         const user = req.session.user
         const id = req.session.user._id;
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         let cartCount = null
         addressHelpers.fetchAllAddress(id).then((addresses) => {
             userHelper.getUserDetails(id).then((userDetails) => {
                 cartHelpers.getcartCount(id).then((count)=>{
                     cartCount = count
-                    res.render('user/user-account', { user, addresses, userDetails, cartCount })
+                    res.render('user/user-account', { user, addresses, userDetails, cartCount,matchingCategory })
                 })
                
             })
@@ -191,15 +200,18 @@ module.exports = {
             res.render('user/error', { message, log: true })
         })
     },
-    getCart: (req, res) => {
+    getCart: async(req, res) => {
         const user = req.session.user
         const id = req.session.user._id
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         console.log(user)
         // console.log(id+"jijih")
         cartHelpers.displayCart(id).then((cartItems) => {
             // console.log(cartItems);
             cartHelpers.getcartCount(id).then((cartCount)=>{
-                res.render('user/user-cart', { cartItems, user,cartCount })
+                res.render('user/user-cart', { cartItems, user,cartCount,matchingCategory })
             })
            
         }).catch((error) => {
@@ -243,10 +255,14 @@ module.exports = {
 
         })
     },
-    getAddaddress: (req, res) => {
+    getAddaddress: async(req, res) => {
+        const user = req.session.user;
         const id = req.session.user._id;
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         cartHelpers.getcartCount(id).then((cartCount)=>{
-            res.render('user/add-address',{cartCount})
+            res.render('user/add-address',{cartCount,matchingCategory,user})
         })
        
     },
@@ -261,9 +277,12 @@ module.exports = {
             res.render('user/error', { message, log: true })
         })
     },
-    getCheckOut: (req, res) => {
+    getCheckOut: async(req, res) => {
         const id = req.session.user._id;
         const user = req.session.user
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         addressHelpers.fetchAllAddress(id).then((addresses) => {
             console.log(addresses)
             cartHelpers.fetchCart(id).then((cartItems) => {
@@ -273,9 +292,9 @@ module.exports = {
                         cartHelpers.getcartCount(id).then((cartCount)=>{
                         console.log(Wallet, '___________________________userWallet')
                         if (Wallet.validAmount) {
-                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user, Wallet,cartCount })
+                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user, Wallet,cartCount,matchingCategory })
                         } else {
-                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user,cartCount })
+                            res.render('user/user-checkout', { addresses, cartItems, validCoupons, user,cartCount,matchingCategory })
                         }
                     })
                     })
@@ -356,11 +375,17 @@ module.exports = {
             })
         })
     },
-    orderPlaced: (req, res) => {
+    orderPlaced: async(req, res) => {
         const user = req.session.user;
-        res.render('user/user-orderPlaced', { user })
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
+        res.render('user/user-orderPlaced', { user,matchingCategory })
     },
-    viewOrders: (req, res) => {
+    viewOrders: async(req, res) => {
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
         const user = req.session.user
         const id = req.session.user._id;
         const sortField = req.query.sortField || 'orderId';
@@ -388,7 +413,7 @@ module.exports = {
             orderHelpers.getAllOrder(id,sortField,sortOrder,skip,perPage,search).then((allOrder) => {
                 cartHelpers.getcartCount(id).then((count)=>{
                     cartCount = count;
-                    res.render('user/user-orderhistory', { user,allOrder,sortField,sortOrder,searchQuery,currentPage:page,totalPages,cartCount })
+                    res.render('user/user-orderhistory', { user,allOrder,sortField,sortOrder,searchQuery,currentPage:page,totalPages,cartCount,matchingCategory })
                 })
                 
             }).catch((error) => {
@@ -403,13 +428,17 @@ module.exports = {
         })
 
     },
-    orderDetails: (req, res) => {
+    orderDetails: async(req, res) => {
+        const user = req.session.user
         const id = req.params.id
         const userId = req.session.user._id
+        const allProducts = await productHelpers.fetchallProducts()
+        const categories = await productHelpers.getAllCategory()
+        const matchingCategory = await productHelpers.productsCategory(allProducts,categories)
 
         orderHelpers.fetchOrderDetails(id).then((orderInfo) => {
             cartHelpers.getcartCount(userId).then((cartCount)=>{
-                res.render('user/user-orderDetails', { orderInfo,cartCount })
+                res.render('user/user-orderDetails', { orderInfo,cartCount,matchingCategory,user })
             })
            
         }).catch((error) => {
@@ -480,6 +509,7 @@ module.exports = {
     passwordChange: (req, res) => {
         const otp = req.body.otp
         const number = req.session.phone;
+      
         userHelper.verifyOtp(otp, number).then((response) => {
             if (response.status) {
                 res.render('user/user-passwordchange', { log: true });

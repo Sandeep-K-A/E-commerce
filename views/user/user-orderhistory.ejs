@@ -345,7 +345,6 @@
                     url: `/return-order/${orderId}`,
                     method: 'get',
                     success: (response) => {
-                        alert(response)
                         if (response.Status && response.order.Status == 'Returned') {
                             $(`#orderStatus-${orderId}`).removeClass().addClass(' badge rounded-pill alert-dark');
                             $(`#orderStatus-${orderId}`).text(response.order.Status);
