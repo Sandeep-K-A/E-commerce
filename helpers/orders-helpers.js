@@ -5,10 +5,14 @@ const walletModel = require('../models/walletModel')
 const categoryModel = require('../models/categoryModel')
 const userModel=require('../models/userModel')
 const cartHelpers = require('../helpers/cart-helpers');
+const fs = require('fs');
+const PDFDocument = require('pdfkit')
+
 const { reject } = require('bcrypt/promises');
 const { error } = require('toastr');
 const { productsCategory } = require('./product-helpers');
 const { name } = require('ejs')
+const products = require('../models/productModel')
 
 module.exports = {
 
@@ -127,7 +131,7 @@ module.exports = {
                 path:'userId',
                 select:'name phone'
             }])
-            console.log(orderInfo.Products)
+            console.log(orderInfo)
             resolve(orderInfo)
         })
     },
@@ -342,6 +346,84 @@ module.exports = {
             }).catch((error)=>{
                 reject(error)
             })
+        })
+    },
+    generateInvoice:(orderInfo)=>{
+        console.log(orderInfo)
+        return new Promise((resolve,reject)=>{
+            const {
+                DeliveryAddress: {
+                  FullName,
+                  HouseAddress,
+                  City,
+                  State,
+                  PostalCode,
+                  Phone,
+                  Email
+                },
+                _id,
+                userId: { _id: userId, name, phone },
+                orderId,
+                Products,
+                PaymentMethod,
+                Status,
+                TotalAmount,
+                PaymentDetails,
+                createdAt,
+                updatedAt,
+                __v
+              } = orderInfo;
+              
+              formattedDate = createdAt.toLocaleDateString('en-GB')
+              const doc = new PDFDocument()
+    
+              doc.font('Times-Roman').fontSize(18).text('INVOICE',{align:'center'});
+              doc.fontSize(15).text('Shipping Address',50,150);
+              doc.fontSize(12).text(`Name: ${FullName}`,50,180)
+              .text(`Office/House No.: ${HouseAddress}`)
+              .text(`City: ${City}`)
+              .text(`State: ${State}`)
+              .text(`ZipCode: ${PostalCode}`)
+              .text(`Email: ${Email}`)
+              .text(`Phone: ${Phone}`)
+    
+              doc.fontSize(15).text('OrderDetails',345,150)
+              doc.fontSize(12).text(`Invoice No: ${orderId}`, 345, 180)
+              .text(`Purchase Date: ${formattedDate}`)
+              .text(`Total Amount: ${TotalAmount}`)
+              .text(`Payment Mode: ${PaymentMethod}`)
+              doc.moveTo(30, 300).lineTo(580, 300).stroke();
+              doc.moveTo(30, 140).lineTo(580, 140).stroke();
+              doc.moveTo(30, 170).lineTo(580, 170).stroke();
+    
+              doc.fontSize(15).text('No.', 50, 340)
+              .text('Name', 100, 340)
+              .text('Quantity', 350, 340)
+              .text('Unit Price', 450, 340)
+              .text('Amount', 550, 340)
+              
+              let y = 370;
+    
+              Products.forEach(({proId,quantity}, index) => {
+                const {ProductTitle,ProductPricing} = proId
+                y += 30;
+                doc.fontSize(12)
+                    .text(`${index + 1}`, 50, y)
+                    .text(ProductTitle, 100, y)
+                    .text(quantity, 350, y)
+                    .text(ProductPricing, 450, y)
+                    .text(ProductPricing * quantity, 550, y)
+              });
+    
+              doc.fontSize(16).text('Subtotal', 400, y + 50)
+              doc.fontSize(18).text(`${TotalAmount}`, 550, y + 50)
+    
+              const stream = doc.pipe(fs.createWriteStream('invoice.pdf'));
+                stream.on('finish', () => {
+                    console.log('PDF created');
+                    resolve();
+                });
+                doc.end();
         })
     }
 }

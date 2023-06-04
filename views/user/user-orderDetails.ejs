@@ -174,9 +174,11 @@
         <div class="container">
           <div class="row order-wrap mx-auto">
             <div >
-              <a href=""><button id="" class="btn btn-sm btn-secondary">
-                <i class="fi-rs-shopping-bag mr-5"></i>Download Invoice
-              </button></a>
+              <% if(orderInfo.Status == 'Delivered'){%>
+                <a href="/invoice/<%=orderInfo.orderId %>"><button id="" class="btn btn-sm btn-secondary">
+                  <i class="fi-rs-shopping-bag mr-5"></i>Download Invoice
+                </button></a>
+              <%} %>
             </div>
             <div class="text-end mb-60">
               <a href="/allorders" class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white border-radius-5 btn-shadow-brand hover-up">Back to all orders</a>

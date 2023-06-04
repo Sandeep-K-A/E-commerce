@@ -418,6 +418,16 @@ module.exports = {
         })
 
     },
+    getInvoice:(req,res)=>{
+        const id = req.params.id;
+        ordersHelpers.fetchOrderDetails(id).then((orderInfo)=>{
+            ordersHelpers.generateInvoice(orderInfo).then(()=>{
+                res.download('invoice.pdf')
+            }).catch((err)=>{
+                console.log("error creating Pdf",err)
+            })
+        })
+    },
     removeProduct: (req, res) => {
         cartId = req.body.cart;
         proId = req.body.product;

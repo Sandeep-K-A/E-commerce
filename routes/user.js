@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('../controller/user-controller');
 const router = express.Router();
-const { getHome,getSignup, postSignup,getSignin, postSignin,Otpsignin,getOtp, OtpLogin,logOut,getShop,productView,getAccount,getCart,addToCart,updateQuantity,getAddaddress,newAddress,getCheckOut,placeOrder,viewOrders,orderDetails,removeProduct,clearCart,orderPlaced,verifyPayment,editAddress,updateUserDetails,getForgotPassword,postForgotPassword,passwordChange,updateUserPassword,cancelOrder,returnOrder,getSearchProducts} = require('../controller/user-controller');
+const { getHome,getSignup, postSignup,getSignin, postSignin,Otpsignin,getOtp, OtpLogin,logOut,getShop,productView,getAccount,getCart,addToCart,updateQuantity,getAddaddress,newAddress,getCheckOut,placeOrder,viewOrders,orderDetails,removeProduct,clearCart,orderPlaced,verifyPayment,editAddress,updateUserDetails,getForgotPassword,postForgotPassword,passwordChange,updateUserPassword,cancelOrder,returnOrder,getSearchProducts,getInvoice} = require('../controller/user-controller');
 // const { getcartCount } = require('../helpers/cart-helpers');
 const {processCoupon} = require('../controller/coupon-controller')
 const {isLoggedIn,isBlocked} = require('../middleware/middleware')
@@ -45,6 +45,7 @@ router.get('/allorders',isBlocked,isLoggedIn,viewOrders)
 router.get('/cancel-order/:id',isBlocked,isLoggedIn,cancelOrder)
 router.get('/return-order/:id',isBlocked,isLoggedIn,returnOrder)
 router.get('/orderdetails/:id',isBlocked,isLoggedIn,orderDetails)
+router.get('/invoice/:id',isBlocked,isLoggedIn,getInvoice)
 router.post('/remove-single-product',isBlocked,isLoggedIn,removeProduct)
 router.get('/clear-cart/:id',isBlocked,isLoggedIn,clearCart)
 // router.get('/manage-address',displayAllAddress)
