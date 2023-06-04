@@ -171,12 +171,12 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html"><%=item.ProductCategory %></a>
+                                            <a href="/quickview/<%=item._id %>"><%=item.ProductCategory %></a>
                                         </div>
-                                        <h2><a href="shop-product-right.html"><%=item.ProductTitle %></a></h2>
-                                        <div class="rating-result" title="90%">
+                                        <h2><a href="/quickview/<%=item._id %>"><%=item.ProductTitle %></a></h2>
+                                        <div>
                                             <span>
-                                                <span>90%</span>
+                                                <span><%=item.ProductDescription %></span>
                                             </span>
                                         </div>
                                         <div class="product-price">
