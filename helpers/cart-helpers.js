@@ -50,11 +50,6 @@ module.exports = {
                 }).exec().then((cartItems) => {
                     console.log('LLLLLLLLLLLLLlll')
                     if (!cartItems) {
-                        // console.log(cartItems)
-                        // let cartItems = new cartModel({
-                        //     userId: id,
-                        //     products: []
-                        // }).save()
                         resolve(cartItems)
                     } else {
                         cartItems = cartItems?.products
