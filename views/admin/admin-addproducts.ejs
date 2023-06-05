@@ -65,6 +65,8 @@
                                             src="/assets1/imgs/theme/upload.svg" id="imagePreview4" alt="">
                                         <input class="form-control" type="file" name="productImage" id="imageInput"
                                             multiple>
+                                            <span id="InputImageError"
+                                        style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                     </div>
                                 </div>
 
@@ -128,8 +130,10 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-md rounded font-sm hover-up " type="submit"
-                                                style="float: right;">Add</button>
+                                            <button class="btn btn-md rounded font-sm hover-up " id="submitAddProducts" type="submit"
+                                                style="float: right;" onclick="validateSubmitAddProducts(event)">Add</button>
+                                                <span id="SubmitError"
+                                                style="color: red;font-size: 12px;margin-top: 5px;"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -226,4 +230,43 @@
             return true;
         }
     }
+
+    $('#imageInput').on('change', function() {
+  var files = $(this)[0].files;
+  var validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+  
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var extension = file.name.split('.').pop().toLowerCase();
+    
+    if ($.inArray(extension, validExtensions) === -1) {
+      // Invalid file type, show an error message or perform any other action
+    //   alert('Invalid file type. Only image files (JPG, JPEG, PNG, GIF, SVG) are allowed.');
+      document.getElementById('InputImageError').innerHTML = "Invalid file type. Only image files (JPG, JPEG, PNG, GIF, SVG) are allowed."
+      $(this).val(''); // Clear the file input field
+      return false;
+    }else{
+        document.getElementById('InputImageError').innerHTML = ""
+        return true
+    }
+  }
+  
+  // All files are valid, continue with your logic
+});
+
+function validateSubmitAddProducts(event){
+    // const productName = document.getElementById('product_name').value;
+    // const productDescription = document.getElementById('product_description').value;
+    // const ProductPrice = document.getElementById('product_price').value;
+    // const productQuantity = document.getElementById('product_quantity').value;
+   event.preventDefault();
+   if(!limitCheckboxSelections() || !validateProductDescription() || !validateProductName() || !validateProductPrice() || !validateProductQuantity()){
+    document.getElementById('SubmitError').innerHTML = "Please Complete all the fields..."
+    return false;
+   }
+   else{
+    $('#submitAddProducts').submit()
+   }
+}
+
 </script>
