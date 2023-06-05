@@ -9,7 +9,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover" id="myTable">
+                <table class="table table-hover  align-middle  table-striped dt-responsive nowrap" id="myTable">
                     <thead>
                         <tr>
                             <th>#ID</th>
@@ -48,7 +48,7 @@
                                 <td style="vertical-align: middle; padding: 0;"><img
                                         src="/assets/imgs/slider/<%=banner.bannerImage %>" alt="" style="width: 40px;">
                                 </td>
-                                <td class="d-flex"><a href="/admin/edit-banner/<%=banner._id %>"
+                                <td><a href="/admin/edit-banner/<%=banner._id %>"
                                         class="btn btn-sm rounded btn-primary font-sm edit-product"
                                         onclick="getEditBanner(event)">Edit</a>
                                     <% if(banner.bannerStatus){%>
