@@ -52,8 +52,8 @@ module.exports = {
             console.log(req.session.user)
             res.redirect('/')
         }).catch((error) => {
-            let message = "Error Creating a new User Account"
-            res.render('user/error', { message, log: true })
+            let err = "user already Exist try another credentials"
+            res.render('user/user-signup', { err, log: true })
         })
     },
     getSignin: (req, res) => {
