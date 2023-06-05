@@ -12,10 +12,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css"> -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
-    <script type="text/javascript"
-        src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+        <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/1.13.4/js/dataTables.responsive.min.js"></script>
+        
 
 
 
@@ -160,7 +159,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-            <table class="table table-responsive align-middle  table-striped dt-responsive nowrap" id="salesTable">
+            <table class="table align-middle  table-striped dt-responsive nowrap" id="salesTable">
 
                 <thead class="table-light">
                     <tr>
@@ -216,18 +215,13 @@
     </div>
 </div>
 <div class="pagination-area mt-30 mb-50">
-    <!-- <nav aria-label="Page navigation example">
+     <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-start">
-                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                <li class="page-item"><a class="page-link" href="#">03</a></li>
-                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">16</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+                
             </ul>
-        </nav> -->
+        </nav>
 </div>
-<!-- </section>  -->
+</section> 
 
 
 
@@ -408,7 +402,8 @@
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            responsive: true
+            responsive: true,
+            paging:true
 
         });
     })
