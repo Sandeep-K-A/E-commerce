@@ -185,7 +185,7 @@
 
     function validateProductName() {
         const productName = document.getElementById('product_name').value;
-        const regExp = /^[A-Z]+(?:[ -][A-Z&]+)?$/
+        const regExp =  /^[a-zA-Z\s&-]+$/
         if (!regExp.test(productName)) {
             document.getElementById('ProductNameError').innerHTML = "Enter a valid ProductName in Upper Case and can only use (&)"
             return false;
@@ -255,10 +255,7 @@
 });
 
 function validateSubmitAddProducts(event){
-    // const productName = document.getElementById('product_name').value;
-    // const productDescription = document.getElementById('product_description').value;
-    // const ProductPrice = document.getElementById('product_price').value;
-    // const productQuantity = document.getElementById('product_quantity').value;
+  
    event.preventDefault();
    if(!limitCheckboxSelections() || !validateProductDescription() || !validateProductName() || !validateProductPrice() || !validateProductQuantity()){
     document.getElementById('SubmitError').innerHTML = "Please Complete all the fields..."

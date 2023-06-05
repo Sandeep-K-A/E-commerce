@@ -15,20 +15,23 @@
             <div class="mb-4">
               <label for="product_name" class="form-label">Product Title</label>
               <input type="text" name="productTitle" placeholder="" value="<%=product.ProductTitle %>"
-                class="form-control" id="product_name">
+                class="form-control" id="product_name" onkeyup="return validateProductName()">
+                <span id="ProductNameError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
             </div>
             <div class="mb-4">
               <label class="form-label">Product Description</label>
-              <textarea placeholder="" name="productDescription" class="form-control"
-                rows="4"><%=product.ProductDescription %></textarea>
+              <textarea placeholder="" name="productDescription" class="form-control" id="product_description"
+                rows="4" onkeyup="return validateProductDescription()"><%=product.ProductDescription %></textarea>
+                <span id="ProductDescriptionError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
             </div>
             <div class="row">
               <div class="col-lg-4">
                 <div class="mb-4">
                   <label class="form-label">Product Price</label>
                   <div class="row gx-2">
-                    <input placeholder="" value="<%=product.ProductPricing %>" type="text" name="productPrice"
-                      class="form-control">
+                    <input placeholder="" value="<%=product.ProductPricing %>" type="text" name="productPrice" id="product_price"
+                      class="form-control" onkeyup="return validateProductPrice()">
+                      <span id="ProductPriceError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                   </div>
                 </div>
                 <div class="mb-4">
@@ -42,8 +45,9 @@
               <div class="col-lg-4">
                 <div class="mb-4">
                   <label class="form-label">Product Quantity</label>
-                  <input placeholder="" value="<%=product.ProductQuantity %>" type="text" name="productQuantity"
-                    class="form-control">
+                  <input placeholder="" value="<%=product.ProductQuantity %>" type="text" name="productQuantity" id="product_quantity"
+                    class="form-control" onkeyup="return validateProductQuantity()">
+                    <span id="ProductQuantityError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                 </div>
               </div>
 
@@ -56,7 +60,8 @@
                 <div class="card-body">
                   <div class="input-upload">
                     <img src="/images/products_image/<%=product.ProductImages[0] %>" alt="">
-                    <input class="form-control" type="file" name="productImage" multiple>
+                    <input class="form-control" type="file" name="productImage" id="imageInput" multiple>
+                    <span id="InputImageError" style="color: red;font-size: 12px;margin-top: 5px;"></span>
                   </div>
                 </div>
               </div>
@@ -68,7 +73,7 @@
                   <div class="row gx-2">
                     <div class="col-sm-6 mb-3">
                       <label class="form-label">Parent Category</label>
-                      <select class="form-select" name="productCategory">
+                      <select class="form-select" name="productCategory" id="product_category">
                         <% categories.forEach((category)=>{%>
                           <% if(category.status){%>
                             <option value="<%=category.name %>">
@@ -120,7 +125,10 @@
                     </div>
                     <div>
                       <button class="btn btn-md rounded font-sm hover-up " type="submit"
-                        style="float: right;">Update</button>
+                        style="float: right;" id="submitUpdate" >Update</button>
+                        <span id="SubmitError"
+                                        style="color: red;font-size: 12px;margin-top: 5px;"></span>
+                                    </div>
                     </div>
                   </div>
                 </div>
@@ -172,5 +180,72 @@
   // Call the limitCheckboxSelections() function to handle initial selection and limit the checkboxes
   limitCheckboxSelections();
 
+  function validateProductName() {
+        const productName = document.getElementById('product_name').value;
+        const regExp = /^[a-zA-Z\s&-]+$/
+        if (!regExp.test(productName)) {
+            document.getElementById('ProductNameError').innerHTML = "Enter a valid ProductName in Upper Case and can only use (&)"
+            return false;
+        } else {
+            document.getElementById('ProductNameError').innerHTML = "";
+            return true;
+        }
+    }
+    function validateProductDescription() {
+        const productDescription = document.getElementById('product_description').value;
+        const regExp = /^(?:\b[^\d\s]+\b\s?){1,6}$/
+        if (!regExp.test(productDescription)) {
+            document.getElementById('ProductDescriptionError').innerHTML = "Enter a valid Product Description at most of 6 words"
+            return false;
+        } else {
+            document.getElementById('ProductDescriptionError').innerHTML = "";
+            return true;
+        }
+    }
+    function validateProductPrice() {
+        const ProductPrice = document.getElementById('product_price').value;
+        const regExp = /^(?!0)\d+$/
+
+        if (!regExp.test(ProductPrice)) {
+            document.getElementById('ProductPriceError').innerHTML = "The Price of the Product must not be just 0 or have any Characters"
+            return false;
+        } else {
+            document.getElementById('ProductPriceError').innerHTML = "";
+            return true;
+        }
+    }
+    function validateProductQuantity() {
+        const productQuantity = document.getElementById('product_quantity').value;
+        const regExp = /^(?!0$)\d{1,3}$/
+        if (!regExp.test(productQuantity)) {
+            document.getElementById('ProductQuantityError').innerHTML = "The Quantity of the Product must not be just 0 or have any Characters"
+            return false;
+        } else {
+            document.getElementById('ProductQuantityError').innerHTML = "";
+            return true;
+        }
+    }
+    $('#imageInput').on('change', function() {
+  var files = $(this)[0].files;
+  var validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+  
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var extension = file.name.split('.').pop().toLowerCase();
+    
+    if ($.inArray(extension, validExtensions) === -1) {
+      // Invalid file type, show an error message or perform any other action
+    //   alert('Invalid file type. Only image files (JPG, JPEG, PNG, GIF, SVG) are allowed.');
+      document.getElementById('InputImageError').innerHTML = "Invalid file type. Only image files (JPG, JPEG, PNG, GIF, SVG) are allowed."
+      $(this).val(''); // Clear the file input field
+      return false;
+    }else{
+        document.getElementById('InputImageError').innerHTML = ""
+        return true
+    }
+  }
+  
+  // All files are valid, continue with your logic
+});
 
 </script>
