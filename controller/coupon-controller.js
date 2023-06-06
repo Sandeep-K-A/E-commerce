@@ -37,7 +37,6 @@ module.exports = {
     getEditCoupon:(req,res)=>{
         const id = req.params.id
         couponHelper.getSingleCoupon(id).then((coupon)=>{
-            console.log(coupon)
             res.render('admin/admin-editcoupon',{layout,coupon})
         }).catch((error)=>{
             let message = "Eroor performing the fetching of Single Coupon Operation..!"

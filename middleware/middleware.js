@@ -56,7 +56,6 @@ module.exports = {
     processOrderStatus:(req,res,next)=>{
         middlewareHelper.pendingOrders().then(()=>{
             console.log('Order Status with pending has be removed from the logs....')
-          
         })
         next()
     }
